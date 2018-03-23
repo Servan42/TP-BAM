@@ -34,10 +34,6 @@ public class LookForHotel {
 	 */
 	public long call() throws RemoteException {
 		//TODO durée de l'interrogation ??
-	}
-
-	public String[] lookForHotel() throws RemoteException {
-		//TODO trouve le nom des hotels correspondants
-		
+		// Appeler "à la main" tous les serveurs
 	}
 }
