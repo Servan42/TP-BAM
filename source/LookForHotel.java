@@ -35,5 +35,6 @@ public class LookForHotel {
 	public long call() throws RemoteException {
 		//TODO durée de l'interrogation ??
 		// Appeler "à la main" tous les serveurs
+		
 	}
 }
