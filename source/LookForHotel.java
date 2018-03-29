@@ -1,4 +1,7 @@
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
@@ -19,8 +22,8 @@ public class LookForHotel {
 	 * Définition de l'objet représentant l'interrogation.
 	 * 
 	 * @param args
-	 *            les arguments n'en comportant qu'un seul qui indique le critère de
-	 *            localisation
+	 *            les arguments n'en comportant qu'un seul qui indique le
+	 *            critère de localisation
 	 */
 	public LookForHotel(String... args) {
 		localisation = args[0];
@@ -33,8 +36,57 @@ public class LookForHotel {
 	 * @throws RemoteException
 	 */
 	public long call() throws RemoteException {
-		//TODO durée de l'interrogation ??
+		// TODO durée de l'interrogation ??
 		// Appeler "à la main" tous les serveurs
+		try {
+			// Recupere les list d'hotels sur les serveurs
+			Chaine obj = (Chaine) java.rmi.Naming.lookup("//localhost:1111/Chaine1");
+			ArrayList<Hotel> listChaine1 = (ArrayList<Hotel>) obj.get(localisation);
+			obj = (Chaine) java.rmi.Naming.lookup("//localhost:2222/Chaine2");
+			ArrayList<Hotel> listChaine2 = (ArrayList<Hotel>) obj.get(localisation);
+			obj = (Chaine) java.rmi.Naming.lookup("//localhost:3333/Chaine3");
+			ArrayList<Hotel> listChaine3 = (ArrayList<Hotel>) obj.get(localisation);
+			obj = (Chaine) java.rmi.Naming.lookup("//localhost:4444/Chaine4");
+			ArrayList<Hotel> listChaine4 = (ArrayList<Hotel>) obj.get(localisation);
+			
+			// Demande les numeros de téléphones à l'annuaire
+			Annuaire annuaire = (Annuaire) java.rmi.Naming.lookup("//localhost:5555/Annuaire");
+			Numero numero;
+			
+			numero = annuaire.get(listChaine1.get(0).toString());
+			
+			System.out.println("Resultat chaine d'hotels 1 :");
+			for(int i = 0; i < listChaine1.size(); i++){
+				numero = annuaire.get(listChaine1.get(i).toString());
+				System.out.println(listChaine1.get(i).toString() + " : " + numero.toString());
+			}
+			
+			System.out.println("Resultat chaine d'hotels 2 :");
+			for(int i = 0; i < listChaine2.size(); i++){
+				numero = annuaire.get(listChaine2.get(i).toString());
+				System.out.println(listChaine2.get(i).toString() + " : " + numero.toString());
+			}
+			
+			System.out.println("Resultat chaine d'hotels 3 :");
+			for(int i = 0; i < listChaine3.size(); i++){
+				numero = annuaire.get(listChaine3.get(i).toString());
+				System.out.println(listChaine3.get(i).toString() + " : " + numero.toString());
+			}
+			
+			System.out.println("Resultat chaine d'hotels 4 :");
+			for(int i = 0; i < listChaine4.size(); i++){
+				numero = annuaire.get(listChaine4.get(i).toString());
+				System.out.println(listChaine4.get(i).toString() + " : " + numero.toString());
+			}
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotBoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+		return 0;
+
 	}
 }
