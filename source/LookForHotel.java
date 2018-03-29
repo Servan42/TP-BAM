@@ -2,6 +2,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
@@ -37,6 +38,7 @@ public class LookForHotel {
 	 * @throws RemoteException
 	 */
 	public long call() throws RemoteException {
+		long timeDebut = new Date().getTime();
 		// TODO durée de l'interrogation ??
 		// Appeler "à la main" tous les serveurs
 		try {
@@ -89,7 +91,9 @@ public class LookForHotel {
 			e.printStackTrace();
 		}
 		
-		return 0;
+		long timeFin = new Date().getTime();
+		
+		return timeFin - timeDebut;
 
 	}
 	
