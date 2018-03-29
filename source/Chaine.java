@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
@@ -15,10 +16,13 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Chaine extends UnicastRemoteObject implements _Chaine {
+	private static final long serialVersionUID = -47;
 	ArrayList<Hotel> hotels;
 	
 	
 	public Chaine(String... args) throws RemoteException {
+		hotels = new ArrayList<Hotel>();
+		
 		/* récupération des hôtels de la chaîne dans le fichier xml passé en 1er argument */
 		DocumentBuilder docBuilder = null;
 		Document doc=null;
