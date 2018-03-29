@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * numéros de téléphone des hôtels répondant à son critère de choix.
  * 
  * @author Morat
+ * @argument la localisation demandée
  */
 public class LookForHotel {
 	/** le critère de localisaton choisi */
@@ -40,17 +41,18 @@ public class LookForHotel {
 		// Appeler "à la main" tous les serveurs
 		try {
 			// Recupere les list d'hotels sur les serveurs
-			Chaine obj = (Chaine) java.rmi.Naming.lookup("//localhost:1111/Chaine1");
+			_Chaine obj = (_Chaine) java.rmi.Naming.lookup("//localhost:1111/Chaine1");
 			ArrayList<Hotel> listChaine1 = (ArrayList<Hotel>) obj.get(localisation);
-			obj = (Chaine) java.rmi.Naming.lookup("//localhost:2222/Chaine2");
+			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:2222/Chaine2");
 			ArrayList<Hotel> listChaine2 = (ArrayList<Hotel>) obj.get(localisation);
-//			obj = (Chaine) java.rmi.Naming.lookup("//localhost:3333/Chaine3");
+
+//			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:3333/Chaine3");
 //			ArrayList<Hotel> listChaine3 = (ArrayList<Hotel>) obj.get(localisation);
-//			obj = (Chaine) java.rmi.Naming.lookup("//localhost:4444/Chaine4");
+//			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:4444/Chaine4");
 //			ArrayList<Hotel> listChaine4 = (ArrayList<Hotel>) obj.get(localisation);
 			
 			// Demande les numeros de téléphones à l'annuaire
-			Annuaire annuaire = (Annuaire) java.rmi.Naming.lookup("//localhost:5555/Annuaire");
+			_Annuaire annuaire = (_Annuaire) java.rmi.Naming.lookup("//localhost:5555/Annuaire");
 			Numero numero;
 			
 			numero = annuaire.get(listChaine1.get(0).toString());
@@ -77,7 +79,8 @@ public class LookForHotel {
 //			for(int i = 0; i < listChaine4.size(); i++){
 //				numero = annuaire.get(listChaine4.get(i).toString());
 //				System.out.println(listChaine4.get(i).toString() + " : " + numero.toString());
-			}
+
+//			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -88,5 +91,14 @@ public class LookForHotel {
 		
 		return 0;
 
+	}
+	
+	public static void main(String args[]) {
+		try {
+			new LookForHotel(args[0]).call();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

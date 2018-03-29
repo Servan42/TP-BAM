@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 /** 
  * 
  * @author CHARLOT Servan - CHANET Zoran
- * @arguments hostel.server1.xml hostel.server2.xml hostel.server3.xml hostel.server4.xml Annuaire.xml
+ * @arguments hostel.server1.xml hostel.server2.xml hostel.server3.xml
  */
 public class Server {
 	public static void main(String args[]) {
@@ -39,21 +39,21 @@ public class Server {
 			LocateRegistry.createRegistry(2222);
 			java.rmi.Naming.bind("//localhost:2222/Chaine2", server2);
 			
-			doc = docBuilder.parse(new File(args[2]));
-			//On récupère les arguments pour la construction de Chaine
-			arguments = doc.getElementsByTagName("service").item(0).getAttributes().getNamedItem("args").getNodeValue();
-			Chaine server3 = new Chaine(arguments);
-			LocateRegistry.createRegistry(3333);
-			java.rmi.Naming.bind("//localhost:3333/Chaine3", server3);
-			
-			doc = docBuilder.parse(new File(args[3]));
-			//On récupère les arguments pour la construction de Chaine
-			arguments = doc.getElementsByTagName("service").item(0).getAttributes().getNamedItem("args").getNodeValue();
-			Chaine server4 = new Chaine(arguments);
-			LocateRegistry.createRegistry(4444);
-			java.rmi.Naming.bind("//localhost:4444/Chaine4", server4);
+//			doc = docBuilder.parse(new File(args[2]));
+//			//On récupère les arguments pour la construction de Chaine
+//			arguments = doc.getElementsByTagName("service").item(0).getAttributes().getNamedItem("args").getNodeValue();
+//			Chaine server3 = new Chaine(arguments);
+//			LocateRegistry.createRegistry(3333);
+//			java.rmi.Naming.bind("//localhost:3333/Chaine3", server3);
+//			
+//			doc = docBuilder.parse(new File(args[3]));
+//			//On récupère les arguments pour la construction de Chaine
+//			arguments = doc.getElementsByTagName("service").item(0).getAttributes().getNamedItem("args").getNodeValue();
+//			Chaine server4 = new Chaine(arguments);
+//			LocateRegistry.createRegistry(4444);
+//			java.rmi.Naming.bind("//localhost:4444/Chaine4", server4);
 
-			Annuaire annuaire = new Annuaire(args[4]);
+			Annuaire annuaire = new Annuaire(args[2]);
 			LocateRegistry.createRegistry(5555);
 			java.rmi.Naming.bind("//localhost:5555/Annuaire", annuaire);
 

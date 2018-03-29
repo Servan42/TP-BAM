@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -14,8 +15,9 @@ import org.xml.sax.SAXException;
 
 public class Annuaire extends UnicastRemoteObject implements _Annuaire {
 	Document annuaire;
+	private static final long serialVersionUID = -2;
 	
-	public Annuaire(String annuaireXML) throws RemoteException {
+	public Annuaire(String annuaireXML) throws RemoteException  {
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
