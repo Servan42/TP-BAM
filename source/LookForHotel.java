@@ -39,7 +39,6 @@ public class LookForHotel {
 	 */
 	public long call() throws RemoteException {
 		long timeDebut = new Date().getTime();
-		// TODO durée de l'interrogation ??
 		// Appeler "à la main" tous les serveurs
 		try {
 			// Recupere les list d'hotels sur les serveurs
@@ -48,11 +47,6 @@ public class LookForHotel {
 			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:2222/Chaine2");
 			ArrayList<Hotel> listChaine2 = (ArrayList<Hotel>) obj.get(localisation);
 
-//			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:3333/Chaine3");
-//			ArrayList<Hotel> listChaine3 = (ArrayList<Hotel>) obj.get(localisation);
-//			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:4444/Chaine4");
-//			ArrayList<Hotel> listChaine4 = (ArrayList<Hotel>) obj.get(localisation);
-			
 			// Demande les numeros de téléphones à l'annuaire
 			_Annuaire annuaire = (_Annuaire) java.rmi.Naming.lookup("//localhost:5555/Annuaire");
 			Numero numero;
@@ -69,24 +63,9 @@ public class LookForHotel {
 				numero = annuaire.get(listChaine2.get(i).getName());
 				System.out.println(listChaine2.get(i).toString() + " : " + numero.toString());
 			}
-			
-//			System.out.println("Resultat chaine d'hotels 3 :");
-//			for(int i = 0; i < listChaine3.size(); i++){
-//				numero = annuaire.get(listChaine3.get(i).toString());
-//				System.out.println(listChaine3.get(i).toString() + " : " + numero.toString());
-//			}
-//			
-//			System.out.println("Resultat chaine d'hotels 4 :");
-//			for(int i = 0; i < listChaine4.size(); i++){
-//				numero = annuaire.get(listChaine4.get(i).toString());
-//				System.out.println(listChaine4.get(i).toString() + " : " + numero.toString());
-
-//			}
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -100,7 +79,6 @@ public class LookForHotel {
 		try {
 			new LookForHotel(args[0]).call();
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

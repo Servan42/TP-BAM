@@ -19,7 +19,6 @@ public class Annuaire extends UnicastRemoteObject implements _Annuaire, Serializ
 	private static final long serialVersionUID = -2;
 	
 	public Annuaire(String annuaireXML) throws RemoteException  {
-		System.out.println("Construction de l'annuaire");
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
