@@ -1,5 +1,6 @@
 package jus.aor.mobilagent.hello;
 
+import jus.aor.mobilagent.kernel.Agent;
 import jus.aor.mobilagent.kernel._Action;
 
 /**
