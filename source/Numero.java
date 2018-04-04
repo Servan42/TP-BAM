@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
  */
@@ -6,7 +8,7 @@
  * Un numéro de téléphone
  * @author Morat 
  */
-public class Numero {
+public class Numero implements Serializable {
 	/** le numéro de téléphone */
 	public String numero;
 	/**

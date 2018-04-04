@@ -38,7 +38,7 @@ public class Annuaire extends UnicastRemoteObject implements _Annuaire {
 	}
 	
 	@Override
-	public Numero get(String abonne) {
+	public Numero get(String abonne) throws RemoteException {
 		boolean found = false;
 		String name, numero = "0";
 		NodeList list = annuaire.getElementsByTagName("Telephone");

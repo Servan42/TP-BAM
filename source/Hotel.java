@@ -10,7 +10,7 @@ import java.rmi.server.UnicastRemoteObject;
  * Un hotel qui est caractérisé par son nom et sa localisation.
  * @author Morat 
  */
-public class Hotel extends UnicastRemoteObject implements Serializable {
+public class Hotel implements Serializable {
 	private static final long serialVersionUID = -42;
 	/** la localisation de l'hôtel */
 	public String localisation;
@@ -21,7 +21,8 @@ public class Hotel extends UnicastRemoteObject implements Serializable {
 	 * @param name le nom de l'hôtel
 	 * @param localisation la localisation de l'hôtel
 	 */
-	public Hotel(String name, String localisation) throws RemoteException { this.name=name; this.localisation=localisation;}
+	public Hotel(String name, String localisation) { this.name=name; this.localisation=localisation;}
+	public String getName() { return name;}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

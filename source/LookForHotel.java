@@ -54,17 +54,16 @@ public class LookForHotel {
 			_Annuaire annuaire = (_Annuaire) java.rmi.Naming.lookup("//localhost:5555/Annuaire");
 			Numero numero;
 			
-			numero = annuaire.get(listChaine1.get(0).toString());
-			
 			System.out.println("Resultat chaine d'hotels 1 :");
 			for(int i = 0; i < listChaine1.size(); i++){
-				numero = annuaire.get(listChaine1.get(i).toString());
+				Hotel host = listChaine1.get(i);
+				numero = annuaire.get(host.getName());
 				System.out.println(listChaine1.get(i).toString() + " : " + numero.toString());
 			}
 			
 			System.out.println("Resultat chaine d'hotels 2 :");
 			for(int i = 0; i < listChaine2.size(); i++){
-				numero = annuaire.get(listChaine2.get(i).toString());
+				numero = annuaire.get(listChaine2.get(i).getName());
 				System.out.println(listChaine2.get(i).toString() + " : " + numero.toString());
 			}
 			
