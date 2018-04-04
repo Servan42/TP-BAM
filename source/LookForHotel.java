@@ -71,6 +71,8 @@ public class LookForHotel {
 		
 		long timeFin = new Date().getTime();
 		
+		System.out.println("Elapsed time : " + (timeFin - timeDebut));
+		
 		return timeFin - timeDebut;
 
 	}
