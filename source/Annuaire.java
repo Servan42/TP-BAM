@@ -15,8 +15,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class Annuaire extends UnicastRemoteObject implements _Annuaire, Serializable {
-	Document annuaire;
-	NodeList list;
 	HashMap<String, Numero> levrai; 
 	private static final long serialVersionUID = -2;
 	
@@ -25,12 +23,9 @@ public class Annuaire extends UnicastRemoteObject implements _Annuaire, Serializ
 		DocumentBuilder docBuilder;
 		try {
 			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc;
-			
 			/* Récupération de l'annuaire dans le fichier xml */
-			this.annuaire = docBuilder.parse(new File(annuaireXML));
-			this.list = annuaire.getElementsByTagName("Telephone");
-			System.out.println("LISTELEN : "+list.getLength());
+			Document annuaire = docBuilder.parse(new File(annuaireXML));
+			NodeList list = annuaire.getElementsByTagName("Telephone");
 			NamedNodeMap attrs;
 			String name, numero;
 			this.levrai = new HashMap<String, Numero>();
@@ -38,11 +33,9 @@ public class Annuaire extends UnicastRemoteObject implements _Annuaire, Serializ
 			for(int i=0; i<list.getLength(); i++) {
 				attrs = list.item(i).getAttributes();
 				name=attrs.getNamedItem("name").getNodeValue();
-				System.out.println("Name : "+name);
 				numero=attrs.getNamedItem("numero").getNodeValue();
 				levrai.put(name, new Numero(numero));
 			}
-			System.out.println("MAPLEN : "+levrai.size());
 			
 		} catch (ParserConfigurationException e) {
 			// TODO Auto-generated catch block
