@@ -61,7 +61,7 @@ public class Annuaire extends UnicastRemoteObject implements _Annuaire, Serializ
 		if(levrai.containsKey(abonne))
 			return levrai.get(abonne);
 		else
-			return null;
+			throw new RemoteException("L'HOTEL DEMANDE N'EXISTE PAS");
 	}
 
 }
