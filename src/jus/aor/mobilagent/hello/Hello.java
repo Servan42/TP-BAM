@@ -9,7 +9,8 @@ import jus.aor.mobilagent.kernel._Action;
  * @author Morat
  */
 public class Hello extends Agent {
-
+	String localisation;
+	
 	/**
 	 * construction d'un agent de type hello.
 	 * 
@@ -17,14 +18,20 @@ public class Hello extends Agent {
 	 *            aucun argument n'est requis
 	 */
 	public Hello(Object... args) {
-		// ....
+		// TODO
+		localisation = (String)args[0];
 	}
 
 	/**
 	 * l'action à entreprendre sur les serveurs visités
 	 */
 	protected _Action doIt = new _Action() {
-		// ...
+		//TODO Récupérer les hotels correspondant à la localisation
+		@Override
+		public void execute() {
+			// TODO Auto-generated method stub
+			
+		}
 	};
 
 	/*
@@ -34,7 +41,9 @@ public class Hello extends Agent {
 	 */
 	@Override
 	protected _Action retour() {
-		// return ...;
+		// return ... TODO;
+		System.out.println("NOT IMPLEMENTED YET");
+		return null;
 	}
 	// ...
 }

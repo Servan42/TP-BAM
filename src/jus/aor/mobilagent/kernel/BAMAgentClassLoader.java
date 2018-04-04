@@ -3,8 +3,8 @@ package jus.aor.mobilagent.kernel;
 public class BAMAgentClassLoader extends ClassLoader {
 	AgentInputStream ais;
 
-	public BAMAgentClassLoader(String chaine, ClassLoader cl) {
-		// TODO
+	public BAMAgentClassLoader(String jarName, ClassLoader parent) {
+		// TODO Definit toutes les classes fournies dans le fichier jarName
 		System.out.println("NOT IMPLEMENTED YET");
 	}
 

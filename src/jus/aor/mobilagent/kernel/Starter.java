@@ -46,6 +46,7 @@ public class Starter {
 	 */
 	public Starter(String... args) {
 		// récupération du niveau de log
+		
 		java.util.logging.Level level;
 		try {
 			level = Level.parse(System.getProperty("LEVEL"));
@@ -66,6 +67,12 @@ public class Starter {
 			doc = docBuilder.parse(new File(args[0]));
 			int port = Integer.parseInt(
 					doc.getElementsByTagName("port").item(0).getAttributes().getNamedItem("value").getNodeValue());
+			
+			// /!\WARNING/!\ Code copié d'on ne sait où
+			loader = new BAMServerClassLoader(new URL[]{new URL("file:Build/MobileAgentServer.jar")}, this.getClass().getClassLoader());
+			classe = (Class<Server>) loader.loadClass("jus.aor.mobilagent.kernel.Server");
+			server = classe.getConstructor(int.class, String.class).newInstance(port, "Server"+port);
+			
 			// Création du serveur
 			createServer(port, args[1]);
 			// ajout des services
