@@ -2,6 +2,7 @@ import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
@@ -37,6 +38,7 @@ public class LookForHotel {
 	 * @throws RemoteException
 	 */
 	public long call() throws RemoteException {
+		long timeDebut = new Date().getTime();
 		// TODO durée de l'interrogation ??
 		// Appeler "à la main" tous les serveurs
 		try {
@@ -45,6 +47,7 @@ public class LookForHotel {
 			ArrayList<Hotel> listChaine1 = (ArrayList<Hotel>) obj.get(localisation);
 			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:2222/Chaine2");
 			ArrayList<Hotel> listChaine2 = (ArrayList<Hotel>) obj.get(localisation);
+
 //			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:3333/Chaine3");
 //			ArrayList<Hotel> listChaine3 = (ArrayList<Hotel>) obj.get(localisation);
 //			obj = (_Chaine) java.rmi.Naming.lookup("//localhost:4444/Chaine4");
@@ -77,6 +80,7 @@ public class LookForHotel {
 //			for(int i = 0; i < listChaine4.size(); i++){
 //				numero = annuaire.get(listChaine4.get(i).toString());
 //				System.out.println(listChaine4.get(i).toString() + " : " + numero.toString());
+
 //			}
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -86,7 +90,9 @@ public class LookForHotel {
 			e.printStackTrace();
 		}
 		
-		return 0;
+		long timeFin = new Date().getTime();
+		
+		return timeFin - timeDebut;
 
 	}
 	
