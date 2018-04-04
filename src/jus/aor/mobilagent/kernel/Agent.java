@@ -1,4 +1,4 @@
-package jus.aor.mobilagent.hostel;
+package jus.aor.mobilagent.kernel;
 
 import jus.aor.mobilagent.kernel.AgentServer;
 import jus.aor.mobilagent.kernel.Etape;
