@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 /** 
  * 
  * @author CHARLOT Servan - CHANET Zoran
- * @arguments hostel.server1.xml hostel.server2.xml hostel.server3.xml
+ * @arguments Configurations/hostel.server1.xml Configurations/hostel.server2.xml DataStore/Annuaire.xml
  */
 public class Server {
 	public static void main(String args[]) {
