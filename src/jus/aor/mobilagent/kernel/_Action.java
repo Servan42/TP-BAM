@@ -7,12 +7,14 @@ import java.io.Serializable;
 
 /**
  * Définit une action à exécuter par un agent.
- * @author  Morat
+ * 
+ * @author Morat
  */
-public interface _Action extends Serializable{
+public interface _Action extends Serializable {
 	/** l'action vide */
 	// TODO
-	public static final _Action NIHIL = null		/*A COMPLETER*/; 
+	public static final _Action NIHIL = null /* A COMPLETER */;
+
 	/**
 	 * Exécute l'action
 	 */
