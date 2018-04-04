@@ -1,3 +1,5 @@
+package jus.aor.mobilagent.kernel;
+
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;

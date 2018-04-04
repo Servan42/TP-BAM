@@ -1,4 +1,4 @@
-package jus.aor.mobilagent.hostel;
+package jus.aor.mobilagent.kernel;
 
 import java.io.File;
 import java.io.IOException;

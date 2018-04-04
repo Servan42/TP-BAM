@@ -1,6 +1,8 @@
+package jus.aor.mobilagent.kernel;
 /**
+ * *J<i>ava</i>U<i>tilities</i>for S<i>tudents</i>
  */
-*J<i>ava</i>U<i>tilities</i>for S<i>tudents</i>
+
 
 import java.util.List;
 

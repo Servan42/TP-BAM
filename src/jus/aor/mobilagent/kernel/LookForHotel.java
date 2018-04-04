@@ -1,3 +1,5 @@
+package jus.aor.mobilagent.kernel;
+
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
  */
@@ -24,7 +26,9 @@ public class LookForHotel{
 	 * @throws RemoteException
 	 */
 	public long call() {
-		// ...
+		// TODO
+		System.out.println("NOT IMPLEMETED YET");
+		return 0;
 	}
 
 	// ...
