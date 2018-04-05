@@ -33,6 +33,10 @@ public class Agent implements _Agent {
 
 	@Override
 	public void reInit(AgentServer agentServer, String serverName) {
+		if(route.hasNext)
+			route.next();
+		else
+			retour().execute();
 		currServ = agentServer;
 		currServName = serverName;
 	}
@@ -64,20 +68,17 @@ public class Agent implements _Agent {
 		try {
 			move(route.get().server.toURL());
 		} catch (MalformedURLException | NoSuchElementException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
 	protected void move(URL url) {
-		// TODO
+		// TODO currServ.sendAgent(this, url ?) ?
 		System.out.println(this.toString() + " Method move(URL) : NOT IMPLEMETED YET");
 	}
 
 	protected String route() {
-		// TODO
-		System.out.println(this.toString() + " Method route : NOT IMPLEMETED YET");
-		return null;
+		return route.toString();
 	}
 
 	public String toString() {

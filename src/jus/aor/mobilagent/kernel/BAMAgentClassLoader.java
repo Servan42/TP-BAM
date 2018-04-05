@@ -1,16 +1,26 @@
 package jus.aor.mobilagent.kernel;
 
+import java.io.IOException;
+
 public class BAMAgentClassLoader extends ClassLoader {
 	AgentInputStream ais;
-
+	String jarName;
+	Jar jar;
+	ClassLoader parent;
+	
 	public BAMAgentClassLoader(String jarName, ClassLoader parent) {
-		// TODO Definit toutes les classes fournies dans le fichier jarName
-		System.out.println(toString() + " BAMAgentClassLoader(String, ClassLoader) NOT IMPLEMENTED YET");
+		this.jarName = jarName;
+		try {
+			this.jar = new Jar(jarName);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		this.parent = parent;
 	}
 
-	public BAMAgentClassLoader(ClassLoader cl) {
-		// TODO
-		System.out.println(toString() + " BAMAgentClassLoader(ClassLoader) NOT IMPLEMENTED YET");
+	public BAMAgentClassLoader(ClassLoader parent) {
+		this.parent = parent;
 	}
 
 	public void integrateCode(Jar jar) {
