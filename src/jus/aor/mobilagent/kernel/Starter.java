@@ -68,13 +68,17 @@ public class Starter {
 					doc.getElementsByTagName("port").item(0).getAttributes().getNamedItem("value").getNodeValue());
 
 			// Création du serveur
+			System.out.println("Creation du server");
 			createServer(port, args[1]);
 			// ajout des services
+			System.out.println("Ajout des services");
 			addServices();
+			System.out.println("Déploiement des agents");
 			// déploiement d'agents
 			deployAgents();
 		} catch (Exception ex) {
 			logger.log(Level.FINE, "Ce programme nécessite un argument : <conf file> <name server>", ex);
+			System.out.println("Ce programme nécessite un argument : <conf file> <name server>" + ex);
 			return;
 		}
 	}
