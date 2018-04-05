@@ -58,7 +58,7 @@ class Route implements Iterable<Etape>, Serializable {
 			throw new NoSuchElementException("La feuille de route est vide");
 		}
 		if(route.size() == 1){ // Il ne reste plus que la dernière etape
-			return route.get(0);
+			return retour;
 		} else {
 			return route.get(1);
 		}
@@ -72,9 +72,10 @@ class Route implements Iterable<Etape>, Serializable {
 	 */
 	Etape next() throws NoSuchElementException {
 		if(route.isEmpty()){
-			throw new NoSuchElementException("La feuille de route est vide");
+			return retour;
+		} else {
+			return route.remove(0);
 		}
-		return route.remove(0);
 	}
 
 	/**
