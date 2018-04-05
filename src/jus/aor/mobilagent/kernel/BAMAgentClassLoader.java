@@ -29,9 +29,9 @@ public class BAMAgentClassLoader extends ClassLoader {
 	}
 
 	private String className(String cn) {
-		// TODO
-		System.out.println(toString() + " className(String) NOT IMPLEMENTED YET");
-		return null;
+		// Peut etre...
+		byte[] classname= jar.getClass(cn);
+		return classname.toString();
 	}
 
 	public Jar extractCode() {

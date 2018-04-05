@@ -76,6 +76,20 @@ final class AgentServer {
 		AgentInputStream ais = new AgentInputStream(socket.getInputStream(), acl);
 		ObjectStreamClass cl = (ObjectStreamClass) ais.readObject();
 		Class<?> a = ais.resolveClass(cl);
+		Object o;
+		try {
+			o = a.newInstance();
+			Agent agent = (Agent) o;
+			ais.close();
+			return agent;
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		// Le server charge son code base...
 		/*
@@ -87,9 +101,10 @@ final class AgentServer {
 		//agent = (Agent) ais.readObject();
 		
 		// Fermeture de l'input stream
-		ais.close();
+		//ais.close();
 		
-		return agent;
+		//return agent;
+		return null;
 	}
 
 	/**
