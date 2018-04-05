@@ -13,7 +13,10 @@ import java.io.Serializable;
 public interface _Action extends Serializable {
 	/** l'action vide */
 	// TODO
-	public static final _Action NIHIL = null /* A COMPLETER */;
+	public static final _Action NIHIL = new _Action() {
+		private static final long serialVersionUID = 9211608560914435550L;
+		public void execute() { ; }
+	};
 
 	/**
 	 * Exécute l'action

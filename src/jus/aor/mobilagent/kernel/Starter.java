@@ -14,10 +14,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -73,8 +71,8 @@ public class Starter {
 			// ajout des services
 			System.out.println("Ajout des services");
 			addServices();
-			System.out.println("Déploiement des agents");
 			// déploiement d'agents
+			System.out.println("Déploiement des agents");
 			deployAgents();
 		} catch (Exception ex) {
 			logger.log(Level.FINE, "Ce programme nécessite un argument : <conf file> <name server>", ex);
@@ -132,7 +130,7 @@ public class Starter {
 	}
 
 	/**
-	 * déploiement les agents définis dans le fichier de configuration
+	 * déploiement des agents définis dans le fichier de configuration
 	 */
 	protected void deployAgents() {
 		NamedNodeMap attrsAgent, attrsEtape;

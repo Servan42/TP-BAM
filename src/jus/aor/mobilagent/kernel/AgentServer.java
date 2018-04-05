@@ -32,7 +32,7 @@ final class AgentServer {
 	 * L'initialisation du server
 	 * 
 	 * @param port
-	 *            the port où est attaché le srvice du bus à agents mobiles
+	 *            the port où est attaché le service du bus à agents mobiles
 	 * @param name
 	 *            le nom du serveur
 	 * @throws Exception

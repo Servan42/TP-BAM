@@ -1,5 +1,17 @@
 package jus.aor.mobilagent.hello;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import jus.aor.mobilagent.kernel.Agent;
 import jus.aor.mobilagent.kernel._Action;
 
@@ -9,28 +21,37 @@ import jus.aor.mobilagent.kernel._Action;
  * @author Morat
  */
 public class Hello extends Agent {
-	String localisation;
+	private static final long serialVersionUID = 7927326332211864657L;
+
+	HashMap<String /*Address*/, String /*Action*/> etapes;
 	
 	/**
 	 * construction d'un agent de type hello.
 	 * 
 	 * @param args
-	 *            aucun argument n'est requis
+	 *            Route à parcourir
 	 */
 	public Hello(Object... args) {
 		// TODO
-		localisation = (String)args[0];
+		System.out.println(toString() + "Hello(Object...) NOT IMPLEMENTED YET");
+		
+		// Recuperation de la liste de serveurs et actions associees
+//		for(int i=0; i<((List<String>)args[0]).size(); i++) {
+//			etapes.put(((List<String>)args[0]).get(i), ((List<String>)args[1]).get(i));
+//		}
 	}
 
 	/**
 	 * l'action à entreprendre sur les serveurs visités
 	 */
 	protected _Action doIt = new _Action() {
-		//TODO Récupérer les hotels correspondant à la localisation
+		private static final long serialVersionUID = -9129644307555501553L;
+
+		// TODO
 		@Override
 		public void execute() {
 			// TODO Auto-generated method stub
-			
+
 		}
 	};
 
@@ -46,7 +67,7 @@ public class Hello extends Agent {
 		return null;
 	}
 	// ...
-	
+
 	public String toString() {
 		return "Classe Hello.java";
 	}
