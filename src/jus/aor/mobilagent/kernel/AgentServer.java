@@ -63,12 +63,12 @@ final class AgentServer {
 		client = s.accept();
 		System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
 		// Le server charge son code base...
-		AgentInputStream ais = new AgentInputStream(client.getInputStream(), new BAMAgentClassLoader(?));
+		AgentInputStream ais = new AgentInputStream(client.getInputStream(), new BAMAgentClassLoader(this.getClass().getClassLoader()));
 		String codebase = (String) ais.readObject();
 		// ...et l'objet représentant cet agent.
 		ObjectStreamClass cl = (ObjectStreamClass) ais.readObject();
 		// Il active cet objet qui execute l'action que l'agent a à realiser sur ce server.
-		ais.resolveClass(cl);
+		Class<?> agent = ais.resolveClass(cl);
 		
 		// Fermeture de l'input stream
 		ais.close();
