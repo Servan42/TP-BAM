@@ -54,6 +54,24 @@ final class AgentServer {
 	 */
 	void run() throws IOException, ClassNotFoundException {
 		// A COMPLETER
+		// TODO
+		System.out.println(this.toString() + " | Class AgentServer.java Method run : NOT FULLY IMPLEMENTED YET");
+	
+		Socket client;
+		// Lorsque l'agent se presente
+		client = s.accept();
+		System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
+		// Le server charge son code base...
+		
+		// ...et l'objet représentant cet agent.
+		
+		// Il active cet objet qui execute l'action que l'agent a à realiser sur ce server.
+		
+	}
+	
+	private _Agent getAgent(Socket socket) {
+		System.out.println("Class AgentServer.java | Method getAgent : NOT IMPLEMETED YET");
+		return null;
 	}
 
 	/**
@@ -130,11 +148,6 @@ class AgentInputStream extends ObjectInputStream {
 	}
 
 	public String toString() {
-		return "Class AgentServer.java";
-	}
-
-	private _Agent getAgent(Socket socket) {
-		System.out.println(this.toString() + " Method getAgent : NOT IMPLEMETED YET");
-		return null;
+		return "Class AgentInputStream";
 	}
 }
