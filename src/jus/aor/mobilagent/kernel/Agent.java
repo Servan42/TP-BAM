@@ -7,12 +7,10 @@ import jus.aor.mobilagent.kernel.AgentServer;
 import jus.aor.mobilagent.kernel.Etape;
 
 public class Agent implements _Agent {
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
+	Route route;
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -60,8 +58,9 @@ public class Agent implements _Agent {
 	}
 
 	private void move() {
-		// TODO
+		// TODO URI dans les etapes, URL demandé par move(URL), sucks
 		System.out.println(this.toString() + " Method move : NOT IMPLEMETED YET");
+		//move(route.get().server);
 	}
 
 	protected void move(URL url) {

@@ -44,14 +44,14 @@ public class Starter {
 	public Starter(String... args) {
 		// récupération du niveau de log
 		
-//		java.util.logging.Level level;
-//		try {
-//			level = Level.parse(System.getProperty("LEVEL"));
-//		} catch (NullPointerException e) {
-//			level = java.util.logging.Level.OFF;
-//		} catch (IllegalArgumentException e) {
-//			level = java.util.logging.Level.SEVERE;
-//		}
+		java.util.logging.Level level;
+		try {
+			level = Level.parse(System.getProperty("LEVEL"));
+		} catch (NullPointerException e) {
+			level = java.util.logging.Level.OFF;
+		} catch (IllegalArgumentException e) {
+			level = java.util.logging.Level.SEVERE;
+		}
 		try {
 			/* Mise en place du logger pour tracer l'application */
 			String loggerName = "jus/aor/mobilagent/" + InetAddress.getLocalHost().getHostName() + "/" + args[1];
@@ -64,7 +64,7 @@ public class Starter {
 			doc = docBuilder.parse(new File(args[0]));
 			int port = Integer.parseInt(
 					doc.getElementsByTagName("port").item(0).getAttributes().getNamedItem("value").getNodeValue());
-
+			System.out.println(doc.toString());
 			// Création du serveur
 			System.out.println("Creation du server");
 			createServer(port, args[1]);

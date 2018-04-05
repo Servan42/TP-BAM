@@ -17,7 +17,7 @@ public interface _Service<T> {
 	 * Appel générique du service.
 	 * 
 	 * @param params
-	 *            les paramètres du services
+	 *            les paramètres du service
 	 * @return la valeur retournée par le service.
 	 * @throws IllegalArgumentException
 	 */
