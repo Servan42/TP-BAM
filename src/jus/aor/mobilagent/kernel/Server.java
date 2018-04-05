@@ -3,6 +3,7 @@
  */
 package jus.aor.mobilagent.kernel;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.URI;
@@ -54,7 +55,21 @@ public final class Server implements _Server {
 			/* démarrage du server d'agents mobiles attaché à cette machine */
 			// A COMPLETER
 			// TODO
-			System.out.println(this.toString() + " Constructor Server() : NOT IMPLEMETED YET");
+			System.out.println(this.toString() + " Constructor Server() : NOT FULLY IMPLEMETED YET");
+			
+			agentServer = new AgentServer(port, name);
+			new Thread(new Runnable() {
+				public void run() {
+					try {
+						agentServer.run();
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}).start();
+			
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
