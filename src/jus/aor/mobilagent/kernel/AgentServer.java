@@ -69,17 +69,22 @@ final class AgentServer {
 	
 	private _Agent getAgent(Socket socket) throws IOException, ClassNotFoundException {
 		System.out.println("Class AgentServer.java | Method getAgent : NOT FULLY IMPLEMETED YET");
-		Agent agent;
-		// Le server charge son code base...
-		AgentInputStream ais = new AgentInputStream(socket.getInputStream(), new BAMAgentClassLoader(this.getClass().getClassLoader()));
 		
+		ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+		BAMAgentClassLoader acl = (BAMAgentClassLoader) ois.readObject();
+		
+		AgentInputStream ais = new AgentInputStream(socket.getInputStream(), acl);
+		ObjectStreamClass cl = (ObjectStreamClass) ais.readObject();
+		Class<?> a = ais.resolveClass(cl);
+		
+		// Le server charge son code base...
 		/*
 		String codebase = (String) ais.readObject();
 		// ...et l'objet représentant cet agent.
 		ObjectStreamClass cl = (ObjectStreamClass) ais.readObject();
 		Class<?> a = ais.resolveClass(cl);
 		*/
-		agent = (Agent) ais.readObject();
+		//agent = (Agent) ais.readObject();
 		
 		// Fermeture de l'input stream
 		ais.close();
