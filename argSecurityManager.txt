@@ -1,0 +1,3 @@
+Starter.java > Run Configuration > Arguments > VM Arguments :
+-Djava.security.policy="/home/servan/Documents/Polytech/S8/AR/TP-BAM/BAM-policy"
+                        ^ Changer par ton chemin.
