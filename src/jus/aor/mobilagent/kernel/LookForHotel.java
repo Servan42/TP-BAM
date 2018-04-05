@@ -34,9 +34,12 @@ public class LookForHotel {
 	 */
 	public long call() {
 		// TODO
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(toString() + " call() NOT IMPLEMETED YET");
 		return 0;
 	}
 
 	// ...
+	public String toString() {
+		return "Classe LookForHotel.java";
+	}
 }
