@@ -23,7 +23,9 @@ import jus.aor.mobilagent.kernel.Route;
 public class Hello extends Agent {
 	private static final long serialVersionUID = 7927326332211864657L;
 	private Route route;
-	HashMap<String /* Address */, String /* Action */> etapes;
+	private HashMap<String /* Address */, String /* Action */> etapes;
+	private String currServ;
+	
 
 	/**
 	 * construction d'un agent de type hello.
@@ -33,7 +35,6 @@ public class Hello extends Agent {
 	 *            d'addresse de serveurs, List<String> d'actions associees
 	 */
 	public Hello(Object... args) {
-		// TODO
 		System.out.println(toString() + "Hello(Object...) NOT IMPLEMENTED YET");
 		this.route = (Route) args[0];
 		if (args[1] != null && args[2] != null)
@@ -58,8 +59,7 @@ public class Hello extends Agent {
 		// TODO
 		@Override
 		public void execute() {
-			// TODO Auto-generated method stub
-
+			System.out.println("Hello execute doIt sur " + currServ);
 		}
 	};
 
