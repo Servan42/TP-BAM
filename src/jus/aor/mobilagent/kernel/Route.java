@@ -72,6 +72,7 @@ class Route implements Iterable<Etape>, Serializable {
 	 */
 	Etape next() throws NoSuchElementException {
 		if(route.isEmpty()){
+			hasNext = false;
 			return retour;
 		} else {
 			return route.remove(0);
