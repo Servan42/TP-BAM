@@ -12,13 +12,12 @@ public class BAMServerClassLoader extends URLClassLoader {
 
 	protected void addURL(URL url) {
 		// TODO
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(toString() + " addURL(URL) NOT IMPLEMETED YET");
 	}
 
 	public String toString() {
 		// TODO
-		System.out.println("NOT IMPLEMETED YET");
-		return null;
+		return "Classe BAMServerClassLoader";
 	}
 
 }

@@ -42,8 +42,12 @@ public class Hello extends Agent {
 	@Override
 	protected _Action retour() {
 		// return ... TODO;
-		System.out.println("NOT IMPLEMENTED YET");
+		System.out.println(toString() + "retour() NOT IMPLEMENTED YET");
 		return null;
 	}
 	// ...
+	
+	public String toString() {
+		return "Classe Hello.java";
+	}
 }

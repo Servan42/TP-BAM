@@ -55,7 +55,7 @@ class Route implements Iterable<Etape>, Serializable {
 	 */
 	Etape get() throws NoSuchElementException {
 		// TODO
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(toString() + " Route.java get() NOT IMPLEMETED YET");
 		return null;
 	}
 
@@ -67,7 +67,7 @@ class Route implements Iterable<Etape>, Serializable {
 	 */
 	Etape next() throws NoSuchElementException {
 		// TODO
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(toString() + " Route.java next() NOT IMPLEMETED YET");
 		return null;
 	}
 
