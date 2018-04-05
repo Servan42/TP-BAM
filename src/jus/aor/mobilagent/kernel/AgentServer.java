@@ -57,16 +57,21 @@ final class AgentServer {
 		// TODO
 		System.out.println(this.toString() + " | Class AgentServer.java Method run : NOT FULLY IMPLEMENTED YET");
 	
+		running = true;
 		Socket client;
 		// Lorsque l'agent se presente
 		client = s.accept();
 		System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
 		// Le server charge son code base...
-		
+		AgentInputStream ais = new AgentInputStream(client.getInputStream(), new BAMAgentClassLoader(?));
+		String codebase = (String) ais.readObject();
 		// ...et l'objet représentant cet agent.
-		
+		ObjectStreamClass cl = (ObjectStreamClass) ais.readObject();
 		// Il active cet objet qui execute l'action que l'agent a à realiser sur ce server.
+		ais.resolveClass(cl);
 		
+		// Fermeture de l'input stream
+		ais.close();
 	}
 	
 	private _Agent getAgent(Socket socket) {
