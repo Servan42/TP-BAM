@@ -130,12 +130,11 @@ class AgentInputStream extends ObjectInputStream {
 	}
 
 	public String toString() {
-		System.out.println("NOT IMPLEMETED YET");
-		return null;
+		return "Class AgentServer.java";
 	}
 
 	private _Agent getAgent(Socket socket) {
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method getAgent : NOT IMPLEMETED YET");
 		return null;
 	}
 }

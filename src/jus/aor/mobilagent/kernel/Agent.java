@@ -16,63 +16,67 @@ public class Agent implements _Agent {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method run : NOT IMPLEMETED YET");
 
 	}
 
 	@Override
 	public void init(AgentServer agentServer, String serverName) {
 		// TODO Auto-generated method stub
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method init : NOT IMPLEMETED YET");
 
 	}
 
 	@Override
 	public void reInit(AgentServer server, String serverName) {
 		// TODO Auto-generated method stub
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method reInit : NOT IMPLEMETED YET");
 
 	}
 
 	@Override
 	public void addEtape(Etape etape) {
 		// TODO Auto-generated method stub
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method addEtape : NOT IMPLEMETED YET");
 
 	}
 
 	@Override
 	public void init(List<ServiceDescriptor> list) {
 		// TODO Auto-generated method stub
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method init<ServiceDescriptor> : NOT IMPLEMETED YET");
 	}
 
 	protected _Action retour() {
-		System.out.println("NOT IMPLEMETED YET");
+		// TODO
+		System.out.println(this.toString() + " Method retour : NOT IMPLEMETED YET");
 		return null;
 	}
 
 	protected _Service getService(String string) {
-		System.out.println("NOT IMPLEMETED YET");
+		// TODO
+		System.out.println(this.toString() + " Method getService : NOT IMPLEMETED YET");
 		return null;
 	}
 
 	private void move() {
-		System.out.println("NOT IMPLEMETED YET");
+		// TODO
+		System.out.println(this.toString() + " Method move : NOT IMPLEMETED YET");
 	}
 
 	protected void move(URL url) {
-		System.out.println("NOT IMPLEMETED YET");
+		// TODO
+		System.out.println(this.toString() + " Method move(URL) : NOT IMPLEMETED YET");
 	}
 
 	protected String route() {
-		System.out.println("NOT IMPLEMETED YET");
+		// TODO
+		System.out.println(this.toString() + " Method route : NOT IMPLEMETED YET");
 		return null;
 	}
 
 	public String toString() {
-		System.out.println("NOT IMPLEMETED YET");
-		return null;
+		return "Class Agent.java";
 	}
 
 }

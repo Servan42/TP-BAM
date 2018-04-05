@@ -53,7 +53,7 @@ public final class Server implements _Server {
 			/* démarrage du server d'agents mobiles attaché à cette machine */
 			// A COMPLETER
 			// TODO
-			System.out.println("NOT IMPLEMETED YET");
+			System.out.println(this.toString() + " Constructor Server() : NOT IMPLEMETED YET");
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
@@ -78,7 +78,7 @@ public final class Server implements _Server {
 		try {
 			// A COMPLETER
 			// TODO
-			System.out.println("NOT IMPLEMETED YET");
+			System.out.println(this.toString()+ " Method addService : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
@@ -104,7 +104,7 @@ public final class Server implements _Server {
 		try {
 			// A COMPLETER en terme de startAgent
 			// TODO
-			System.out.println("NOT IMPLEMETED YET");
+			System.out.println(this.toString() + " Method deployAgent : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
@@ -127,7 +127,7 @@ public final class Server implements _Server {
 		try {
 			// A COMPLETER en terme de startAgent
 			// TODO
-			System.out.println("NOT IMPLEMETED YET");
+			System.out.println(this.toString() + " Method deployAgent<ServiceDescriptor> : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
@@ -147,11 +147,10 @@ public final class Server implements _Server {
 	protected void startAgent(_Agent agent, BAMAgentClassLoader loader) throws Exception {
 		// A COMPLETER
 		// TODO
-		System.out.println("NOT IMPLEMETED YET");
+		System.out.println(this.toString() + " Method startAgent : NOT IMPLEMETED YET");
 	}
 
 	public String toString() {
-		System.out.println("NOT IMPLEMETED YET");
-		return null;
+		return "Class Server.java";
 	}
 }
