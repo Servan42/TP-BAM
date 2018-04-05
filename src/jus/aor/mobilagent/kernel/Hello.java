@@ -22,32 +22,32 @@ import jus.aor.mobilagent.kernel.Route;
  */
 public class Hello extends Agent {
 	private static final long serialVersionUID = 7927326332211864657L;
-	private Route route;
-	private HashMap<String /* Address */, String /* Action */> etapes;
-	private String currServ;
-	
 
 	/**
 	 * construction d'un agent de type hello.
 	 * 
+	 * // * @param args // * Route initialisee mais potentiellement incomplete,
+	 * List<String> // * d'addresse de serveurs, List<String> d'actions associees
+	 * 
 	 * @param args
-	 *            Route initialisee mais potentiellement incomplete, List<String>
-	 *            d'addresse de serveurs, List<String> d'actions associees
+	 *            le serveur hébergeant initialement l'agent, le nom logique du
+	 *            serveur d'agents
 	 */
 	public Hello(Object... args) {
-		System.out.println(toString() + "Hello(Object...) NOT IMPLEMENTED YET");
-		this.route = (Route) args[0];
-		if (args[1] != null && args[2] != null)
-			for (int i = 0; i < ((List<String>) args[1]).size(); i++) {
-				try {
-					route.add(new Etape(new URI(((List<String>) args[1]).get(i)),
-							(_Action) this.getClass().getField(((List<String>) args[2]).get(i)).get(this)));
-				} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException
-						| URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
+		// this.route = (Route) args[0];
+		// if (args[1] != null && args[2] != null)
+		// for (int i = 0; i < ((List<String>) args[1]).size(); i++) {
+		// try {
+		// route.add(new Etape(new URI(((List<String>) args[1]).get(i)),
+		// (_Action) this.getClass().getField(((List<String>)
+		// args[2]).get(i)).get(this)));
+		// } catch (IllegalArgumentException | IllegalAccessException |
+		// NoSuchFieldException | SecurityException
+		// | URISyntaxException e) {
+		// e.printStackTrace();
+		// }
+		// }
+		init((AgentServer)args[0], (String)args[1]);
 	}
 
 	/**
@@ -56,7 +56,6 @@ public class Hello extends Agent {
 	public _Action doIt = new _Action() {
 		private static final long serialVersionUID = -9129644307555501553L;
 
-		// TODO
 		@Override
 		public void execute() {
 			System.out.println("Hello execute doIt sur " + currServ);

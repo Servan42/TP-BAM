@@ -1,5 +1,7 @@
 package jus.aor.mobilagent.kernel;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
 
@@ -10,6 +12,7 @@ public class Agent implements _Agent {
 	private static final long serialVersionUID = 1L;
 
 	Route route;
+	String currServ;
 	
 	@Override
 	public void run() {
@@ -20,23 +23,19 @@ public class Agent implements _Agent {
 
 	@Override
 	public void init(AgentServer agentServer, String serverName) {
-		// TODO Auto-generated method stub
-		System.out.println(this.toString() + " Method init : NOT IMPLEMETED YET");
-
+		route = new Route(new Etape(agentServer.site(), _Action.NIHIL));
+		currServ = serverName;
 	}
 
 	@Override
 	public void reInit(AgentServer server, String serverName) {
-		// TODO Auto-generated method stub
-		System.out.println(this.toString() + " Method reInit : NOT IMPLEMETED YET");
-
+		// TODO que faire de server ?
+		currServ = serverName;
 	}
 
 	@Override
 	public void addEtape(Etape etape) {
-		// TODO Auto-generated method stub
-		System.out.println(this.toString() + " Method addEtape : NOT IMPLEMETED YET");
-
+		route.add(etape);
 	}
 
 	@Override
