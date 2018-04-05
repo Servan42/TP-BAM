@@ -58,7 +58,7 @@ public class Hello extends Agent {
 
 		@Override
 		public void execute() {
-			System.out.println("Hello execute doIt sur " + currServ);
+			System.out.println("Hello execute doIt sur " + currServName);
 		}
 	};
 

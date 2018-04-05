@@ -1,9 +1,11 @@
 package jus.aor.mobilagent.kernel;
 
+import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import jus.aor.mobilagent.kernel.AgentServer;
 import jus.aor.mobilagent.kernel.Etape;
@@ -12,7 +14,8 @@ public class Agent implements _Agent {
 	private static final long serialVersionUID = 1L;
 
 	Route route;
-	String currServ;
+	AgentServer currServ;
+	String currServName;
 	
 	@Override
 	public void run() {
@@ -24,13 +27,14 @@ public class Agent implements _Agent {
 	@Override
 	public void init(AgentServer agentServer, String serverName) {
 		route = new Route(new Etape(agentServer.site(), _Action.NIHIL));
-		currServ = serverName;
+		currServ = agentServer;
+		currServName = serverName;
 	}
 
 	@Override
-	public void reInit(AgentServer server, String serverName) {
-		// TODO que faire de server ?
-		currServ = serverName;
+	public void reInit(AgentServer agentServer, String serverName) {
+		currServ = agentServer;
+		currServName = serverName;
 	}
 
 	@Override
@@ -45,21 +49,24 @@ public class Agent implements _Agent {
 	}
 
 	protected _Action retour() {
-		// TODO
-		System.out.println(this.toString() + " Method retour : NOT IMPLEMETED YET");
-		return null;
+		return new _Action() { 
+			private static final long serialVersionUID = -3742771451224038951L;
+			
+			public void execute() {System.out.println("J'AI FINI !");}
+		};
 	}
 
-	protected _Service getService(String string) {
-		// TODO
-		System.out.println(this.toString() + " Method getService : NOT IMPLEMETED YET");
-		return null;
+	protected _Service getService(String name) {
+		return currServ.getService(name);
 	}
 
 	private void move() {
-		// TODO URI dans les etapes, URL demandé par move(URL), sucks
-		System.out.println(this.toString() + " Method move : NOT IMPLEMETED YET");
-		//move(route.get().server);
+		try {
+			move(route.get().server.toURL());
+		} catch (MalformedURLException | NoSuchElementException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	protected void move(URL url) {
