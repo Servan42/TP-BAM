@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import jus.aor.mobilagent.hello.Hello;
+import jus.aor.mobilagent.kernel.Hello;
 import jus.aor.mobilagent.kernel.BAMAgentClassLoader;
 import jus.aor.mobilagent.kernel._Agent;
 
@@ -121,8 +121,8 @@ public final class Server implements _Server {
 			// A COMPLETER en terme de startAgent
 			// TODO
 			System.out.println(this.toString() + " Method deployAgent : NOT IMPLEMETED YET");
-			Route route = new Route(new Etape(new URI("://localhost:"+port),_Action.NIHIL));
-			Class.forName(className).getConstructor(Route.class).newInstance(route);
+			Route route = new Route(new Etape(new URI("mobilagent://...:"+port+"/"),_Action.NIHIL));
+			Class.forName(className).getConstructor(Route.class, List.class, List.class).newInstance(route, etapeAddress, etapeAction);
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
