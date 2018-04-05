@@ -54,9 +54,14 @@ class Route implements Iterable<Etape>, Serializable {
 	 * @return la prochaine étape.
 	 */
 	Etape get() throws NoSuchElementException {
-		// TODO
-		System.out.println(toString() + " Route.java get() NOT IMPLEMETED YET");
-		return null;
+		if(route.isEmpty()){
+			throw new NoSuchElementException("La feuille de route est vide");
+		}
+		if(route.size() == 1){ // Il ne reste plus que la dernière etape
+			return route.get(0);
+		} else {
+			return route.get(1);
+		}
 	}
 
 	/**
@@ -66,9 +71,10 @@ class Route implements Iterable<Etape>, Serializable {
 	 * @return la prochaine étape.
 	 */
 	Etape next() throws NoSuchElementException {
-		// TODO
-		System.out.println(toString() + " Route.java next() NOT IMPLEMETED YET");
-		return null;
+		if(route.isEmpty()){
+			throw new NoSuchElementException("La feuille de route est vide");
+		}
+		return route.remove(0);
 	}
 
 	/**

@@ -64,12 +64,13 @@ public class Starter {
 			doc = docBuilder.parse(new File(args[0]));
 			int port = Integer.parseInt(
 					doc.getElementsByTagName("port").item(0).getAttributes().getNamedItem("value").getNodeValue());
-			System.out.println(doc.toString());
+			
 			// Création du serveur
 			System.out.println("Creation du server");
 			createServer(port, args[1]);
 			// ajout des services
 			System.out.println("Ajout des services");
+			// TODO later, après l'objectif 3.
 			addServices();
 			// déploiement d'agents
 			System.out.println("Déploiement des agents");
