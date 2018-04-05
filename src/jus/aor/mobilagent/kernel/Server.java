@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import jus.aor.mobilagent.kernel.Hello;
 import jus.aor.mobilagent.kernel.BAMAgentClassLoader;
 import jus.aor.mobilagent.kernel._Agent;
 
@@ -25,7 +26,7 @@ public final class Server implements _Server {
 	/** le nom logique du serveur */
 	protected String name;
 	/**
-	 * le port où sera ataché le service du bus à agents mobiles. Pafr défaut on
+	 * le port où sera ataché le service du bus à agents mobiles. Par défaut on
 	 * prendra le port 10140
 	 */
 	protected int port = 10140;
@@ -114,12 +115,14 @@ public final class Server implements _Server {
 	 * @param etapeAction
 	 *            la liste des actions des étapes
 	 */
-	public final void deployAgent(String classeName, Object[] args, String codeBase, List<String> etapeAddress,
+	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
 			// A COMPLETER en terme de startAgent
 			// TODO
 			System.out.println(this.toString() + " Method deployAgent : NOT IMPLEMETED YET");
+			Route route = new Route(new Etape(new URI("mobilagent://...:"+port+"/"),_Action.NIHIL));
+			Class.forName(className).getConstructor(Route.class, List.class, List.class).newInstance(route, etapeAddress, etapeAction);
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
