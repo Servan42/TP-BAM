@@ -5,7 +5,6 @@ package jus.aor.mobilagent.kernel;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -47,21 +46,21 @@ public class Starter {
 	public Starter(String... args) {
 		// récupération du niveau de log
 		
-		java.util.logging.Level level;
-		try {
-			level = Level.parse(System.getProperty("LEVEL"));
-		} catch (NullPointerException e) {
-			level = java.util.logging.Level.OFF;
-		} catch (IllegalArgumentException e) {
-			level = java.util.logging.Level.SEVERE;
-		}
+//		java.util.logging.Level level;
+//		try {
+//			level = Level.parse(System.getProperty("LEVEL"));
+//		} catch (NullPointerException e) {
+//			level = java.util.logging.Level.OFF;
+//		} catch (IllegalArgumentException e) {
+//			level = java.util.logging.Level.SEVERE;
+//		}
 		try {
 			/* Mise en place du logger pour tracer l'application */
 			String loggerName = "jus/aor/mobilagent/" + InetAddress.getLocalHost().getHostName() + "/" + args[1];
 			logger = Logger.getLogger(loggerName);
 			// logger.setUseParentHandlers(false);
 			logger.addHandler(new IOHandler());
-			logger.setLevel(level);
+			logger.setLevel(java.util.logging.Level.SEVERE);
 			/* Récupération d'informations de configuration */
 			DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			doc = docBuilder.parse(new File(args[0]));
