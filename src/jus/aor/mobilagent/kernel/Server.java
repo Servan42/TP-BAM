@@ -53,10 +53,6 @@ public final class Server implements _Server {
 			loggerName = "jus/aor/mobilagent/" + InetAddress.getLocalHost().getHostName() + "/" + this.name;
 			logger = Logger.getLogger(loggerName);
 			/* démarrage du server d'agents mobiles attaché à cette machine */
-			// A COMPLETER
-			// TODO
-			System.out.println(this.toString() + " Constructor Server() : NOT FULLY IMPLEMETED YET");
-			
 			agentServer = new AgentServer(port, name);
 			new Thread(new Runnable() {
 				public void run() {
@@ -122,6 +118,7 @@ public final class Server implements _Server {
 			agent.init(agentServer, name);
 			for(int i=0; i<etapeAddress.size(); i++)
 				agent.addEtape(new Etape(new URI(etapeAddress.get(i)), (_Action)(agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);

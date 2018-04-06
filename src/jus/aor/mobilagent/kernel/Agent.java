@@ -51,8 +51,6 @@ public class Agent implements _Agent {
 		route = new Route(new Etape(agentServer.site(), _Action.NIHIL));
 		currServ = agentServer;
 		currServName = serverName;
-		if(route.hasNext)
-			move();
 	}
 
 	@Override
@@ -97,6 +95,8 @@ public class Agent implements _Agent {
 	protected void move(URL url) {
 		String[] addressAndPort = url.toString().split(":");
 		try {
+			System.out.println("J'avance vers le serveur suivant");
+			System.out.println("host = " + addressAndPort[0] + " port = " + addressAndPort[1]);
 			Socket server = new Socket(addressAndPort[0], Integer.valueOf(addressAndPort[1]));
 			OutputStream os = server.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(os);
