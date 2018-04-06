@@ -95,9 +95,9 @@ final class AgentServer {
 	@Override
 	public String toString() {
 		try {
-			return "mobilagent://" + InetAddress.getLocalHost().getHostName() + ":" + port;
+			return "http://" + InetAddress.getLocalHost().getHostName() + ":" + port;
 		} catch (UnknownHostException e) {
-			return "mobilagent://";
+			return "http://";
 		}
 	}
 
@@ -114,13 +114,13 @@ final class AgentServer {
 
 	/**
 	 * restitue l'URI de ce serveur qui est de la forme :
-	 * "mobilagent://<host>:<port>" ou null si cette opération échoue.
+	 * "http://<host>:<port>" ou null si cette opération échoue.
 	 * 
 	 * @return l'URI du serveur
 	 */
 	URI site() {
 		try {
-			return new URI("mobilagent://" + InetAddress.getLocalHost().getHostName() + ":" + port);
+			return new URI("http://" + InetAddress.getLocalHost().getHostName() + ":" + port);
 		} catch (Exception e) {
 			return null;
 		}
