@@ -1,6 +1,10 @@
 package jus.aor.mobilagent.kernel;
 
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -13,15 +17,33 @@ import jus.aor.mobilagent.kernel.Etape;
 public class Agent implements _Agent {
 	private static final long serialVersionUID = 1L;
 
-	private Route route;
-	private transient AgentServer currServ;
-	private transient String currServName;
+	protected Route route;
+	protected transient AgentServer currServ;
+	protected transient String currServName;
+	protected Jar codeBase;
 	
+	/**
+	 * le constructeur auquel on donne le codebase
+	 * 
+	 * @param args
+	 *            String le chemin vers le codebase (.jar)
+	 */
+	public Agent(Object... args) {
+		try {
+			codeBase = new Jar((String)args[0]);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		System.out.println(this.toString() + " Method run : NOT IMPLEMETED YET");
-
+		route.get().action.execute();
+		route.next();
+		if(route.hasNext)
+			move();
+		else
+			retour().execute();
 	}
 
 	@Override
@@ -33,10 +55,6 @@ public class Agent implements _Agent {
 
 	@Override
 	public void reInit(AgentServer agentServer, String serverName) {
-		if(route.hasNext)
-			route.next();
-		else
-			retour().execute();
 		currServ = agentServer;
 		currServName = serverName;
 	}
@@ -53,10 +71,12 @@ public class Agent implements _Agent {
 	}
 
 	protected _Action retour() {
-		return new _Action() { 
+		return new _Action() {
 			private static final long serialVersionUID = -3742771451224038951L;
-			
-			public void execute() {System.out.println("J'AI FINI !");}
+
+			public void execute() {
+				System.out.println("J'AI FINI !");
+			}
 		};
 	}
 
@@ -73,8 +93,18 @@ public class Agent implements _Agent {
 	}
 
 	protected void move(URL url) {
-		// TODO currServ.sendAgent(this, url ?) ?
-		System.out.println(this.toString() + " Method move(URL) : NOT IMPLEMETED YET");
+		String[] addressAndPort = url.toString().split(":");
+		try {
+			Socket server = new Socket(addressAndPort[0], Integer.valueOf(addressAndPort[1]));
+			OutputStream os = server.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject(codeBase);
+			oos.writeObject(this);
+			server.close();
+		} catch (NumberFormatException | IOException e) {
+			System.out.println("Erreur dans move(URL), host = " + addressAndPort[0] + " port = " + addressAndPort[1]);
+			e.printStackTrace();
+		}
 	}
 
 	protected String route() {
