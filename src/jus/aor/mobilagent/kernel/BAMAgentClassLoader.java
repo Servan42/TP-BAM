@@ -24,10 +24,16 @@ public class BAMAgentClassLoader extends ClassLoader {
 		this.parent = parent;
 	}
 
+	/**
+	 * This function loads the agent's code on the server from the jar it
+	 * transports
+	 * 
+	 * @param jar
+	 */
 	public void integrateCode(Jar jar) {
 		for (Map.Entry<String, byte[]> item : jar) {
 			String s = item.getKey().substring(0, item.getKey().indexOf(".class")).replace('/', '.');
-			if(findLoadedClass(s) != null){
+			if (findLoadedClass(s) != null) {
 				defineClass(s, item.getValue(), 0, item.getValue().length);
 			}
 		}
