@@ -118,11 +118,11 @@ public final class Server implements _Server {
 	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
-			// A COMPLETER en terme de startAgent
-			// TODO
-			System.out.println(this.toString() + " Method deployAgent : NOT IMPLEMETED YET");
-			Route route = new Route(new Etape(new URI("mobilagent://...:"+port+"/"),_Action.NIHIL));
-			Class.forName(className).getConstructor(Route.class, List.class, List.class).newInstance(route, etapeAddress, etapeAction);
+			_Agent agent = (_Agent)Class.forName(className).getConstructor(String.class).newInstance(codeBase);
+			agent.init(agentServer, name);
+			for(int i=0; i<etapeAddress.size(); i++)
+				agent.addEtape(new Etape(new URI(etapeAddress.get(i)), (_Action)(agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			new Thread(agent).start();
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
