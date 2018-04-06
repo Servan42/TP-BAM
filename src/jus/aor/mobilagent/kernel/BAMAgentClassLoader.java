@@ -3,14 +3,12 @@ package jus.aor.mobilagent.kernel;
 import java.io.IOException;
 import java.util.Map;
 
-import org.w3c.dom.Node;
-
 public class BAMAgentClassLoader extends ClassLoader {
 	AgentInputStream ais;
 	String jarName;
 	Jar jar;
 	ClassLoader parent;
-	
+
 	public BAMAgentClassLoader(String jarName, ClassLoader parent) {
 		this.jarName = jarName;
 		try {
@@ -18,7 +16,7 @@ public class BAMAgentClassLoader extends ClassLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		this.parent = parent;
 	}
 
@@ -28,18 +26,19 @@ public class BAMAgentClassLoader extends ClassLoader {
 
 	public void integrateCode(Jar jar) {
 		for (Map.Entry<String, byte[]> item : jar) {
-			defineClass(item.getKey(),item.getValue(),0,item.getValue().length);
+			defineClass(item.getKey(), item.getValue(), 0, item.getValue().length);
 		}
 	}
 
 	private String className(String cn) {
 		// Peut etre...
-		byte[] classname= jar.getClass(cn);
+		byte[] classname = jar.getClass(cn);
 		return classname.toString();
 	}
 
 	/**
 	 * Lors de l'envoi, recupère le code au niveau du classe loader
+	 * 
 	 * @return
 	 */
 	public Jar extractCode() {
