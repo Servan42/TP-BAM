@@ -26,7 +26,9 @@ public class BAMAgentClassLoader extends ClassLoader {
 
 	public void integrateCode(Jar jar) {
 		for (Map.Entry<String, byte[]> item : jar) {
-			defineClass(item.getKey(), item.getValue(), 0, item.getValue().length);
+			if (findLoadedClass(item.getKey()) != null) {
+				defineClass(null, item.getValue(), 0, item.getValue().length);
+			}
 		}
 	}
 
