@@ -3,8 +3,6 @@ package jus.aor.mobilagent.kernel;
 import java.io.IOException;
 import java.util.Map;
 
-import org.w3c.dom.Node;
-
 public class BAMAgentClassLoader extends ClassLoader {
 	AgentInputStream ais;
 	String jarName;
@@ -29,13 +27,6 @@ public class BAMAgentClassLoader extends ClassLoader {
 	public void integrateCode(Jar jar) {
 		for (Map.Entry<String, byte[]> item : jar) {
 			String s = item.getKey().substring(0, item.getKey().indexOf(".class")).replace('/', '.');
-//			try {
-//				loadClass(s, false);
-//			} catch (ClassNotFoundException e) {
-//				defineClass(s, item.getValue(), 0, item.getValue().length);
-//			}
-
-			// defineClass(s, item.getValue(), 0, item.getValue().length);
 			if(findLoadedClass(s) != null){
 				defineClass(s, item.getValue(), 0, item.getValue().length);
 			}
@@ -45,7 +36,6 @@ public class BAMAgentClassLoader extends ClassLoader {
 	private String className(String cn) {
 		// Peut etre...
 		byte[] classname = jar.getClass(cn);
-		System.out.println("classname : " + classname.toString());
 		return classname.toString();
 	}
 

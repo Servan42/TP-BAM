@@ -4,17 +4,11 @@
 package jus.aor.mobilagent.kernel;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import jus.aor.mobilagent.kernel.Hello;
-import jus.aor.mobilagent.kernel.BAMAgentClassLoader;
-import jus.aor.mobilagent.kernel._Agent;
 
 /**
  * Le serveur principal permettant le lancement d'un serveur d'agents mobiles et
@@ -65,7 +59,7 @@ public final class Server implements _Server {
 					}
 				}
 			}).start();
-			
+
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
@@ -90,7 +84,7 @@ public final class Server implements _Server {
 		try {
 			// A COMPLETER
 			// TODO
-			System.out.println(this.toString()+ " Method addService : NOT IMPLEMETED YET");
+			System.out.println(this.toString() + " Method addService : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
@@ -114,13 +108,15 @@ public final class Server implements _Server {
 	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
-			System.out.println("Création de l'agent... "+className+" "+codeBase);
-//			_Agent agent = (_Agent)Class.forName(className).getConstructor(String.class).newInstance(codeBase);
+			System.out.println("Création de l'agent... " + className + " " + codeBase);
+			// _Agent agent =
+			// (_Agent)Class.forName(className).getConstructor(String.class).newInstance(codeBase);
 			_Agent agent = new Hello(codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
-			for(int i=0; i<etapeAddress.size(); i++)
-				agent.addEtape(new Etape(new URI(etapeAddress.get(i)), (_Action)(agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			for (int i = 0; i < etapeAddress.size(); i++)
+				agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
+						(_Action) (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
 			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
 		} catch (Exception ex) {
