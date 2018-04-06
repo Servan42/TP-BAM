@@ -51,6 +51,8 @@ public class Agent implements _Agent {
 		route = new Route(new Etape(agentServer.site(), _Action.NIHIL));
 		currServ = agentServer;
 		currServName = serverName;
+		if(route.hasNext)
+			move();
 	}
 
 	@Override
@@ -73,7 +75,7 @@ public class Agent implements _Agent {
 	protected _Action retour() {
 		return new _Action() {
 			private static final long serialVersionUID = -3742771451224038951L;
-
+			
 			public void execute() {
 				System.out.println("J'AI FINI !");
 			}
