@@ -114,14 +114,17 @@ public final class Server implements _Server {
 	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
-			_Agent agent = (_Agent)Class.forName(className).getConstructor(String.class).newInstance(codeBase);
+			System.out.println("Création de l'agent... "+className+" "+codeBase);
+//			_Agent agent = (_Agent)Class.forName(className).getConstructor(String.class).newInstance(codeBase);
+			_Agent agent = new Hello(codeBase);
 			agent.init(agentServer, name);
+			System.out.println("Creation de la route de l'agent...");
 			for(int i=0; i<etapeAddress.size(); i++)
 				agent.addEtape(new Etape(new URI(etapeAddress.get(i)), (_Action)(agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
 			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
 		} catch (Exception ex) {
-			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			System.out.println("Erreur durant le lancement du serveur : " + ex);
 			return;
 		}
 	}

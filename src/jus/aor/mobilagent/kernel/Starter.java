@@ -150,6 +150,7 @@ public class Starter {
 				serverAction.add(attrsEtape.getNamedItem("action").getNodeValue());
 				serverAddress.add(attrsEtape.getNamedItem("server").getNodeValue());
 			}
+			System.out.println("Continuation du déploiement...");
 			deployAgent(classeName, args, codeBase, serverAddress, serverAction);
 		}
 	}
@@ -171,6 +172,7 @@ public class Starter {
 	protected void deployAgent(String classeName, Object[] args, String codeBase, List<String> serverAddress,
 			List<String> serverAction) {
 		try {
+			System.out.println("Déploiement niveau serveur...");
 			server.deployAgent(classeName, args, codeBase, serverAddress, serverAction);
 		} catch (Exception e) {
 			logger.log(Level.FINE, " erreur durant le déploiement de l'agent", e);

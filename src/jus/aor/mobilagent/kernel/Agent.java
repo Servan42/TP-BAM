@@ -34,6 +34,7 @@ public class Agent implements _Agent {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		System.out.println("Agent créé");
 	}
 
 	@Override
@@ -51,6 +52,7 @@ public class Agent implements _Agent {
 		route = new Route(new Etape(agentServer.site(), _Action.NIHIL));
 		currServ = agentServer;
 		currServName = serverName;
+		System.out.println("Agent initialisé");
 	}
 
 	@Override
@@ -86,25 +88,24 @@ public class Agent implements _Agent {
 
 	private void move() {
 		try {
+			System.out.println("Moving to "+route.get().server);
 			move(route.get().server.toURL());
-		} catch (MalformedURLException | NoSuchElementException e) {
+		} catch (Exception e) {
+			System.out.println("Erreur à la récupération de l'URL");
 			e.printStackTrace();
 		}
 	}
 
 	protected void move(URL url) {
-		String[] addressAndPort = url.toString().split(":");
 		try {
-			System.out.println("J'avance vers le serveur suivant");
-			System.out.println("host = " + addressAndPort[0] + " port = " + addressAndPort[1]);
-			Socket server = new Socket(addressAndPort[0], Integer.valueOf(addressAndPort[1]));
+			Socket server = new Socket(url.getHost(), url.getPort());
 			OutputStream os = server.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 			oos.writeObject(codeBase);
 			oos.writeObject(this);
 			server.close();
-		} catch (NumberFormatException | IOException e) {
-			System.out.println("Erreur dans move(URL), host = " + addressAndPort[0] + " port = " + addressAndPort[1]);
+		} catch (Exception e) {
+			System.out.println("Erreur dans move(URL), host = " + url.getHost() + " port = " + url.getPort());
 			e.printStackTrace();
 		}
 	}
