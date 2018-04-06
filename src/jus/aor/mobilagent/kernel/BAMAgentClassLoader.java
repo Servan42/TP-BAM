@@ -1,6 +1,9 @@
 package jus.aor.mobilagent.kernel;
 
 import java.io.IOException;
+import java.util.Map;
+
+import org.w3c.dom.Node;
 
 public class BAMAgentClassLoader extends ClassLoader {
 	AgentInputStream ais;
@@ -24,8 +27,9 @@ public class BAMAgentClassLoader extends ClassLoader {
 	}
 
 	public void integrateCode(Jar jar) {
-		// TODO
-		System.out.println(toString() + " integrateCode(Jar) NOT IMPLEMENTED YET");
+		for (Map.Entry<String, byte[]> item : jar) {
+			defineClass(item.getKey(),item.getValue(),0,item.getValue().length);
+		}
 	}
 
 	private String className(String cn) {
@@ -34,6 +38,10 @@ public class BAMAgentClassLoader extends ClassLoader {
 		return classname.toString();
 	}
 
+	/**
+	 * Lors de l'envoi, recupère le code au niveau du classe loader
+	 * @return
+	 */
 	public Jar extractCode() {
 		// TODO
 		System.out.println(toString() + " extractCode() NOT IMPLEMENTED YET");

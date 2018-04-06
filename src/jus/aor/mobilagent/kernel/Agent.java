@@ -13,9 +13,9 @@ import jus.aor.mobilagent.kernel.Etape;
 public class Agent implements _Agent {
 	private static final long serialVersionUID = 1L;
 
-	Route route;
-	AgentServer currServ;
-	String currServName;
+	private Route route;
+	private transient AgentServer currServ;
+	private transient String currServName;
 	
 	@Override
 	public void run() {
