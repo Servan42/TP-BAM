@@ -10,7 +10,7 @@ public class BAMAgentClassLoader extends ClassLoader {
 	String jarName;
 	Jar jar;
 	ClassLoader parent;
-	
+
 	public BAMAgentClassLoader(String jarName, ClassLoader parent) {
 		this.jarName = jarName;
 		try {
@@ -18,7 +18,7 @@ public class BAMAgentClassLoader extends ClassLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		this.parent = parent;
 	}
 
@@ -28,18 +28,30 @@ public class BAMAgentClassLoader extends ClassLoader {
 
 	public void integrateCode(Jar jar) {
 		for (Map.Entry<String, byte[]> item : jar) {
-			defineClass(item.getKey(),item.getValue(),0,item.getValue().length);
+			String s = item.getKey().substring(0, item.getKey().indexOf(".class")).replace('/', '.');
+//			try {
+//				loadClass(s, false);
+//			} catch (ClassNotFoundException e) {
+//				defineClass(s, item.getValue(), 0, item.getValue().length);
+//			}
+
+			// defineClass(s, item.getValue(), 0, item.getValue().length);
+			if(findLoadedClass(s) != null){
+				defineClass(s, item.getValue(), 0, item.getValue().length);
+			}
 		}
 	}
 
 	private String className(String cn) {
 		// Peut etre...
-		byte[] classname= jar.getClass(cn);
+		byte[] classname = jar.getClass(cn);
+		System.out.println("classname : " + classname.toString());
 		return classname.toString();
 	}
 
 	/**
 	 * Lors de l'envoi, recupère le code au niveau du classe loader
+	 * 
 	 * @return
 	 */
 	public Jar extractCode() {
