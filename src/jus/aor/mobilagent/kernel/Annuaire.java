@@ -61,7 +61,7 @@ public class Annuaire implements _Annuaire, _Service {
 		List<Numero> retour = new ArrayList<Numero>();
 		for(int i=0; i< ((List<String>)params[0]).size(); i++)
 			try {
-				retour.add(get(((List<String>)params[0]).get(i)));
+				retour.add(get(((List<Hotel>)params[0]).get(i).name));
 
 			} catch (ParserConfigurationException | SAXException | IOException e) {
 				e.printStackTrace();

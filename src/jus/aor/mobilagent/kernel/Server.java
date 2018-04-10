@@ -41,7 +41,7 @@ public final class Server implements _Server {
 	 * Démarre un serveur de type mobilagent
 	 * 
 	 * @param port
-	 *            le port d'écuote du serveur d'agent
+	 *            le port d'écoute du serveur d'agent
 	 * @param name
 	 *            le nom du serveur
 	 */
@@ -70,6 +70,8 @@ public final class Server implements _Server {
 			Thread.sleep(1000);
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			System.out.println("Erreur durant le lancement du serveur " + ex);
+			ex.printStackTrace();
 			return;
 		}
 	}
@@ -117,7 +119,7 @@ public final class Server implements _Server {
 		try {
 			System.out.println("Création de l'agent... ");
 			// FIXME Utiliser className, le nom de la classe donnée dans le xml
-//			_Agent agent = (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
+			// _Agent agent = (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
 			_Agent agent = new LookForHotel((String)args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
