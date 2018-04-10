@@ -55,7 +55,7 @@ final class AgentServer {
 	void run() throws IOException, ClassNotFoundException {
 		running = true;
 		Socket client;
-		while(true) {
+		while (true) {
 			client = s.accept();
 			System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
 			Agent agent = (Agent) this.getAgent(client);
@@ -115,8 +115,8 @@ final class AgentServer {
 	}
 
 	/**
-	 * restitue l'URI de ce serveur qui est de la forme :
-	 * "http://<host>:<port>" ou null si cette opération échoue.
+	 * restitue l'URI de ce serveur qui est de la forme : "http://<host>:<port>" ou
+	 * null si cette opération échoue.
 	 * 
 	 * @return l'URI du serveur
 	 */

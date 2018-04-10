@@ -65,11 +65,11 @@ public final class Server implements _Server {
 					}
 				}
 			}).start();
-			
+
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
-			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			// logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			System.out.println("Erreur durant le lancement du serveur " + ex);
 			ex.printStackTrace();
 			return;
@@ -90,10 +90,11 @@ public final class Server implements _Server {
 	 */
 	public final void addService(String name, String classeName, String codeBase, Object... args) {
 		try {
-			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String.class).newInstance(args[0]);
+			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String.class)
+					.newInstance(args[0]);
 			agentServer.addService(name, service);
 		} catch (Exception ex) {
-			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			// logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
 			ex.printStackTrace();
 			return;
@@ -119,12 +120,14 @@ public final class Server implements _Server {
 		try {
 			System.out.println("Création de l'agent... ");
 			// FIXME Utiliser className, le nom de la classe donnée dans le xml
-			// _Agent agent = (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
-			_Agent agent = new LookForHotel((String)args[0], codeBase);
+			// _Agent agent =
+			// (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
+			_Agent agent = new LookForHotel((String) args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
-			for(int i=0; i<etapeAddress.size(); i++)
-				agent.addEtape(new Etape(new URI(etapeAddress.get(i)), (_Action)(agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			for (int i = 0; i < etapeAddress.size(); i++)
+				agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
+						(_Action) (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
 			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
 		} catch (Exception ex) {
@@ -152,7 +155,7 @@ public final class Server implements _Server {
 			// TODO
 			System.out.println(this.toString() + " Method deployAgent<ServiceDescriptor> : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
-			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+//			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
 		}
 	}
