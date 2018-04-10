@@ -44,11 +44,11 @@ public class LookForHotel extends Agent {
 	 */
 	public long call() {
 		// TODO
-		long timeDebut = new Date().getTime();
+//		long timeDebut = new Date().getTime();
 		System.out.println(toString() + " call() NOT IMPLEMETED YET");
-		long timeFin = new Date().getTime();
-		System.out.println("Elapsed time : " + (timeFin - timeDebut));
-		return timeFin - timeDebut;
+//		long timeFin = new Date().getTime();
+//		System.out.println("Elapsed time : " + (timeFin - timeDebut));
+		return super.timeFin - super.timeDebut;
 	}
 
 	/**
