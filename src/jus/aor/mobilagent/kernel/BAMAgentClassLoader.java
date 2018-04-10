@@ -32,17 +32,14 @@ public class BAMAgentClassLoader extends ClassLoader {
 	 */
 	public void integrateCode(Jar jar) {
 		for (Map.Entry<String, byte[]> item : jar) {
-			String s = item.getKey().substring(0, item.getKey().indexOf(".class")).replace('/', '.');
-			if (findLoadedClass(s) != null) {
-				defineClass(s, item.getValue(), 0, item.getValue().length);
+			if (findLoadedClass(this.className(item.getKey())) != null) {
+				defineClass(this.className(item.getKey()), item.getValue(), 0, item.getValue().length);
 			}
 		}
 	}
 
 	private String className(String cn) {
-		// Peut etre...
-		byte[] classname = jar.getClass(cn);
-		return classname.toString();
+		return cn.substring(0, cn.indexOf(".class")).replace('/', '.');
 	}
 
 	/**
