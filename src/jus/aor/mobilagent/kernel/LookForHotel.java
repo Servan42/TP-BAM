@@ -60,7 +60,7 @@ public class LookForHotel extends Agent {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void execute() {
-			System.out.println("LFH execute findHotel sur " + currServName);
+			System.out.println("LookForHotel execute findHotel sur " + currServName);
 			listHotels = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
 			System.out.println("LFH execute findHotel sur " + currServName);
 			for (int i = 0; i < listHotels.size(); i++) {
