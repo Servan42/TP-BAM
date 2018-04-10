@@ -1,6 +1,7 @@
 package jus.aor.mobilagent.kernel;
 
 import java.io.IOException;
+import java.util.List;
 
 import jus.aor.mobilagent.kernel.Jar;
 import jus.aor.mobilagent.kernel._Action;
@@ -65,6 +66,10 @@ public class LookForHotel extends Agent {
 		@Override
 		public void execute() {
 			System.out.println("LFH execute findTelephone sur " + currServName);
+			_Service Telephones = currServ.getService("Telephones");
+			List<Numero> liste = (List<Numero>)Telephones.call(listHotels);
+			for(int i=0; i<liste.size(); i++)
+				System.out.println(listHotels.get(i).name + " " + liste.get(i).numero);
 		}
 	};
 

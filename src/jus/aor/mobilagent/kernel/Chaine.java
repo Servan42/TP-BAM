@@ -68,7 +68,7 @@ public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 	/**
 	 * @param String
 	 *            la localisation recherchee
-	 * @return List<Hotel> las hotels pour la localisation cherchee
+	 * @return List<Hotel> les hotels pour la localisation cherchee
 	 */
 	public Object call(Object... params) throws IllegalArgumentException {
 		return get((String) params[0]);
