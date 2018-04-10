@@ -55,11 +55,13 @@ final class AgentServer {
 	void run() throws IOException, ClassNotFoundException {
 		running = true;
 		Socket client;
-		client = s.accept();
-		System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
-		Agent agent = (Agent) this.getAgent(client);
-		agent.reInit(this, name);
-		new Thread(agent).start();
+		while(true) {
+			client = s.accept();
+			System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
+			Agent agent = (Agent) this.getAgent(client);
+			agent.reInit(this, name);
+			new Thread(agent).start();
+		}
 	}
 
 	private _Agent getAgent(Socket socket) throws IOException, ClassNotFoundException {
