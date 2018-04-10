@@ -21,6 +21,7 @@ public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 	ArrayList<Hotel> hotels;
 
 	public Chaine(String... args) throws RemoteException {
+		System.out.println("Plop");
 		hotels = new ArrayList<Hotel>();
 
 		/*
