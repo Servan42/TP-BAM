@@ -88,8 +88,8 @@ public final class Server implements _Server {
 	 */
 	public final void addService(String name, String classeName, String codeBase, Object... args) {
 		try {
-			_Service service = Class.forName(classeName).getConstructor(String[].class).newInstance(args);
-//			agentServer.addService(name, new _Service<?>() { public ? call(Object... args) {;}});
+			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String[].class).newInstance(args);
+			agentServer.addService(name, service);
 			// TODO Finir
 			System.out.println(toString()+" addService(...) NOT FULLY IMPLEMENTED YET");
 		} catch (Exception ex) {
