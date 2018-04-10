@@ -1,9 +1,8 @@
 package jus.aor.mobilagent.kernel;
 
-import java.io.IOException;
-
-import jus.aor.mobilagent.kernel.Jar;
-import jus.aor.mobilagent.kernel._Action;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
@@ -40,8 +39,11 @@ public class LookForHotel extends Agent {
 	 */
 	public long call() {
 		// TODO
+		long timeDebut = new Date().getTime();
 		System.out.println(toString() + " call() NOT IMPLEMETED YET");
-		return 0;
+		long timeFin = new Date().getTime();
+		System.out.println("Elapsed time : " + (timeFin - timeDebut));
+		return timeFin - timeDebut;
 	}
 
 	/**
@@ -50,9 +52,15 @@ public class LookForHotel extends Agent {
 	public _Action findHotel = new _Action() {
 		private static final long serialVersionUID = -9129644307555501553L;
 
+		@SuppressWarnings("unchecked")
 		@Override
 		public void execute() {
+			ArrayList<Hotel> listChaine1 = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
 			System.out.println("LFH execute findHotel sur " + currServName);
+			for (int i = 0; i < listChaine1.size(); i++) {
+				Hotel host = listChaine1.get(i);
+				System.out.println(host.toString());
+			}
 		}
 	};
 
