@@ -4,6 +4,7 @@
 package jus.aor.mobilagent.kernel;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.URI;
@@ -88,7 +89,7 @@ public final class Server implements _Server {
 	 */
 	public final void addService(String name, String classeName, String codeBase, Object... args) {
 		try {
-			Object service = Class.forName(classeName).getConstructor(String[].class).newInstance(args);
+			_Service service = Class.forName(classeName).getConstructor(String[].class).newInstance(args);
 //			agentServer.addService(name, new _Service<?>() { public ? call(Object... args) {;}});
 			// TODO Finir
 			System.out.println(toString()+" addService(...) NOT FULLY IMPLEMENTED YET");
@@ -119,9 +120,10 @@ public final class Server implements _Server {
 			// FIXME Utiliser className, le nom de la classe donnée dans le xml
 //			Object[] thing = {codeBase};// = new Object[];
 //			thing[0] = codeBase;
-//			_Agent agent = (_Agent)Class.forName(className).getConstructor(Object[].class).newInstance(thing);
+			Constructor<_Agent> construct = (Constructor<_Agent>)Class.forName(className).getConstructor(args.getClass());
+			_Agent agent = construct.newInstance(args);
 //			_Agent agent = new Hello(codeBase);
-			_Agent agent = new LookForHotel((String)args[0], codeBase);
+//			_Agent agent = new LookForHotel((String)args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
 			for(int i=0; i<etapeAddress.size(); i++)
@@ -130,7 +132,7 @@ public final class Server implements _Server {
 			new Thread(agent).start();
 		} catch (Exception ex) {
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
-//			ex.printStackTrace();
+			ex.printStackTrace();
 			return;
 		}
 	}

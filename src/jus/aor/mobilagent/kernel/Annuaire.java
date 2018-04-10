@@ -2,6 +2,7 @@ package jus.aor.mobilagent.kernel;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,12 +13,10 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Annuaire implements _Annuaire {
+public class Annuaire implements _Annuaire, _Service {
 
 	@Override
 	public Numero get(String abonne) throws ParserConfigurationException, SAXException, IOException {
-		// TODO Auto-generated method stub
-
 		/* Récupération de l'annuaire dans le fichier xml */
 		DocumentBuilder docBuilder = null;
 		Document doc = null;
@@ -42,7 +41,18 @@ public class Annuaire implements _Annuaire {
 				.getNodeValue();
 
 		return new Numero(numero);
-		// return null;
+	}
+
+	@Override
+	/**
+	 * @param ArrayList<String>
+	 *            la liste des abonnes
+	 * @return List<Numero> la liste des numeros demandes
+	 */
+	public Object call(Object... params) throws IllegalArgumentException {
+		ArrayList<Numero> retour;
+//		for(int i=0; i<((List<String>)params[0]))
+		return null;
 	}
 
 }

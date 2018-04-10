@@ -16,7 +16,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Chaine extends UnicastRemoteObject implements _Chaine {
+public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 	private static final long serialVersionUID = -47;
 	ArrayList<Hotel> hotels;
 
@@ -62,6 +62,16 @@ public class Chaine extends UnicastRemoteObject implements _Chaine {
 				result.add(hotels.get(i));
 
 		return result;
+	}
+
+	@Override
+	/**
+	 * @param String
+	 *            la localisation recherchee
+	 * @return List<Hotel> las hotels pour la localisation cherchee
+	 */
+	public Object call(Object... params) throws IllegalArgumentException {
+		return get((String) params[0]);
 	}
 
 }
