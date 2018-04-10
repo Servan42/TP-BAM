@@ -88,7 +88,7 @@ public final class Server implements _Server {
 	 */
 	public final void addService(String name, String classeName, String codeBase, Object... args) {
 		try {
-			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String[].class).newInstance(args);
+			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String.class).newInstance(args[0]);
 			agentServer.addService(name, service);
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);

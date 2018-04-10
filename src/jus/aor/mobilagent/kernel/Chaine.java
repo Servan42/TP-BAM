@@ -20,7 +20,7 @@ public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 	private static final long serialVersionUID = -47;
 	ArrayList<Hotel> hotels;
 
-	public Chaine(String... args) throws RemoteException {
+	public Chaine(String args) throws RemoteException {
 		System.out.println("Plop");
 		hotels = new ArrayList<Hotel>();
 
@@ -37,7 +37,7 @@ public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 			e1.printStackTrace();
 		}
 		try {
-			doc = docBuilder.parse(new File(args[0]));
+			doc = docBuilder.parse(new File(args));
 		} catch (SAXException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
