@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -21,6 +22,8 @@ public class Agent implements _Agent {
 	protected transient AgentServer currServ;
 	protected transient String currServName;
 	protected Jar codeBase;
+	protected long timeDebut;
+	protected long timeFin;
 	
 	/**
 	 * le constructeur auquel on donne le codebase
@@ -39,6 +42,7 @@ public class Agent implements _Agent {
 
 	@Override
 	public void run() {
+		if(timeDebut == 0) timeDebut = new Date().getTime();
 		route.get().action.execute();
 		route.next();
 		if(route.hasNext)
@@ -78,6 +82,8 @@ public class Agent implements _Agent {
 			
 			public void execute() {
 				System.out.println("J'AI FINI !");
+				timeFin = new Date().getTime();
+				System.out.println("Elapsed time : " + (timeFin - timeDebut) + " ms");
 			}
 		};
 	}

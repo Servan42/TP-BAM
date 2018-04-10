@@ -77,7 +77,7 @@ public class Starter {
 			System.out.println("Déploiement des agents");
 			deployAgents();
 		} catch (Exception ex) {
-			logger.log(Level.FINE, "Ce programme nécessite un argument : <conf file> <name server>", ex);
+//			logger.log(Level.FINE, "Ce programme nécessite un argument : <conf file> <name server>", ex);
 			System.out.println("Ce programme nécessite un argument : <conf file> <name server>" + ex);
 			return;
 		}
@@ -128,7 +128,9 @@ public class Starter {
 		try {
 			server.addService(name, classeName, codeBase, args);
 		} catch (Exception e) {
-			logger.log(Level.FINE, " erreur durant l'ajout d'un service", e);
+//			logger.log(Level.FINE, " erreur durant l'ajout d'un service", e);
+			System.out.println(" erreur durant l'ajout d'un service" + e);
+			e.printStackTrace();
 		}
 	}
 
@@ -177,7 +179,9 @@ public class Starter {
 			System.out.println("Déploiement niveau serveur...");
 			server.deployAgent(classeName, args, codeBase, serverAddress, serverAction);
 		} catch (Exception e) {
-			logger.log(Level.FINE, " erreur durant le déploiement de l'agent", e);
+//			logger.log(Level.FINE, " erreur durant le déploiement de l'agent", e);
+			System.out.println(" erreur durant l'ajout d'un service" + e);
+			e.printStackTrace();
 		}
 	}
 
