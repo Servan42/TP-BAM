@@ -90,6 +90,8 @@ public final class Server implements _Server {
 	 */
 	public final void addService(String name, String classeName, String codeBase, Object... args) {
 		try {
+			BAMAgentClassLoader bamacl = new BAMAgentClassLoader(codeBase, this.getClass().getClassLoader());
+			bamacl.integrateCode(new Jar(codeBase));
 			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String.class)
 					.newInstance(args[0]);
 			agentServer.addService(name, service);

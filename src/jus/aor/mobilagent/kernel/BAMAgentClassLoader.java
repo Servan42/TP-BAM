@@ -36,6 +36,8 @@ public class BAMAgentClassLoader extends ClassLoader {
 				defineClass(this.className(item.getKey()), item.getValue(), 0, item.getValue().length);
 			}
 		}
+		if(this.jar == null)
+			this.jar = jar;
 	}
 
 	private String className(String cn) {
@@ -48,9 +50,8 @@ public class BAMAgentClassLoader extends ClassLoader {
 	 * @return
 	 */
 	public Jar extractCode() {
-		// TODO
-		System.out.println(toString() + " extractCode() NOT IMPLEMENTED YET");
-		return null;
+		// TODO PAS SÛR DU TOUT
+		return jar;
 	}
 
 	public String toString() {
