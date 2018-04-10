@@ -18,7 +18,6 @@ import jus.aor.mobilagent.kernel._Action;
 public class LookForHotel extends Agent {
 	/** le critère de localisaton choisi */
 	private String localisation;
-	private Jar codeBase;
 
 	// ...
 	/**
@@ -29,12 +28,8 @@ public class LookForHotel extends Agent {
 	 *            codeBase
 	 */
 	public LookForHotel(String... args) {
-		try {
-			localisation = args[0];
-			codeBase = new Jar(args[1]);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		super(args[1]);
+		localisation = args[0];
 	}
 
 	/**
@@ -57,7 +52,7 @@ public class LookForHotel extends Agent {
 
 		@Override
 		public void execute() {
-			System.out.println("Hello execute doIt sur " + currServName);
+			System.out.println("LFH execute findHotel sur " + currServName);
 		}
 	};
 
@@ -69,7 +64,7 @@ public class LookForHotel extends Agent {
 
 		@Override
 		public void execute() {
-			System.out.println("Hello execute doIt sur " + currServName);
+			System.out.println("LFH execute findTelephone sur " + currServName);
 		}
 	};
 

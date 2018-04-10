@@ -1,0 +1,12 @@
+BAM
+
+Agent
+	Deployé sur un serveur, puis finis sur le même
+		Doit executer une action vide sur le serveur de départ
+	Feuille de route
+		Succession de serveurs + actions
+		Route
+			Sequence d'étapes
+		Etape
+			Server courant + action on it
+		Comment tenir compte des serveurs non opérationnels ?
