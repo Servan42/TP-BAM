@@ -17,6 +17,7 @@ import java.util.Date;
 public class LookForHotel extends Agent {
 	/** le critère de localisaton choisi */
 	private String localisation;
+	private ArrayList<Hotel> listHotels;
 
 	// ...
 	/**
@@ -55,11 +56,11 @@ public class LookForHotel extends Agent {
 		@SuppressWarnings("unchecked")
 		@Override
 		public void execute() {
-			ArrayList<Hotel> listChaine1 = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
+			listHotels = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
 			System.out.println("LFH execute findHotel sur " + currServName);
-			for (int i = 0; i < listChaine1.size(); i++) {
-				Hotel host = listChaine1.get(i);
-				System.out.println(host.toString());
+			for (int i = 0; i < listHotels.size(); i++) {
+				Hotel hotel = listHotels.get(i);
+				System.out.println(hotel.toString());
 			}
 		}
 	};
