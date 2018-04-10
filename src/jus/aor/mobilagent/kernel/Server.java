@@ -117,10 +117,7 @@ public final class Server implements _Server {
 		try {
 			System.out.println("Création de l'agent... ");
 			// FIXME Utiliser className, le nom de la classe donnée dans le xml
-//			Object[] thing = {codeBase};// = new Object[];
-//			thing[0] = codeBase;
 //			_Agent agent = (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
-//			_Agent agent = new Hello(codeBase);
 			_Agent agent = new LookForHotel((String)args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
