@@ -43,7 +43,7 @@ public class Starter {
 	 */
 	public Starter(String... args) {
 		// récupération du niveau de log
-		
+
 		java.util.logging.Level level;
 		try {
 			level = Level.parse(System.getProperty("LEVEL"));
@@ -64,14 +64,15 @@ public class Starter {
 			doc = docBuilder.parse(new File(args[0]));
 			int port = Integer.parseInt(
 					doc.getElementsByTagName("port").item(0).getAttributes().getNamedItem("value").getNodeValue());
-			
+
 			// Création du serveur
 			System.out.println("Creation du server");
 			createServer(port, args[1]);
+
 			// ajout des services
 			System.out.println("Ajout des services");
-			// TODO later, après l'objectif 3.
 			addServices();
+
 			// déploiement d'agents
 			System.out.println("Déploiement des agents");
 			deployAgents();
@@ -86,6 +87,7 @@ public class Starter {
 	protected void createServer(int port, String name)
 			throws MalformedURLException, ClassNotFoundException, InstantiationException, IllegalAccessException,
 			IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
+
 		loader = new BAMServerClassLoader(new URL[] { new URL("file:///.../MobilagentServer.jar") },
 				this.getClass().getClassLoader());
 		classe = (Class<jus.aor.mobilagent.kernel.Server>) Class.forName("jus.aor.mobilagent.kernel.Server", true,
