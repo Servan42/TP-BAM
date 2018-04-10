@@ -4,11 +4,17 @@
 package jus.aor.mobilagent.kernel;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.URI;
+import java.net.URL;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import com.sun.org.apache.bcel.internal.generic.LoadClass;
+
+import jus.aor.mobilagent.kernel.BAMAgentClassLoader;
 
 /**
  * Le serveur principal permettant le lancement d'un serveur d'agents mobiles et
@@ -59,7 +65,7 @@ public final class Server implements _Server {
 					}
 				}
 			}).start();
-
+			
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
@@ -82,9 +88,10 @@ public final class Server implements _Server {
 	 */
 	public final void addService(String name, String classeName, String codeBase, Object... args) {
 		try {
-			// A COMPLETER
-			// TODO
-			System.out.println(this.toString() + " Method addService : NOT IMPLEMETED YET");
+			Object service = Class.forName(classeName).getConstructor(String[].class).newInstance(args);
+//			agentServer.addService(name, new _Service<?>() { public ? call(Object... args) {;}});
+			// TODO Finir
+			System.out.println(toString()+" addService(...) NOT FULLY IMPLEMENTED YET");
 		} catch (Exception ex) {
 			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			return;
@@ -108,19 +115,22 @@ public final class Server implements _Server {
 	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
-			System.out.println("Création de l'agent... " + className + " " + codeBase);
-			// _Agent agent =
-			// (_Agent)Class.forName(className).getConstructor(String.class).newInstance(codeBase);
-			_Agent agent = new Hello(codeBase);
+			System.out.println("Création de l'agent... ");
+			// FIXME Utiliser className, le nom de la classe donnée dans le xml
+//			Object[] thing = {codeBase};// = new Object[];
+//			thing[0] = codeBase;
+//			_Agent agent = (_Agent)Class.forName(className).getConstructor(Object[].class).newInstance(thing);
+//			_Agent agent = new Hello(codeBase);
+			_Agent agent = new LookForHotel((String)args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
-			for (int i = 0; i < etapeAddress.size(); i++)
-				agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
-						(_Action) (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			for(int i=0; i<etapeAddress.size(); i++)
+				agent.addEtape(new Etape(new URI(etapeAddress.get(i)), (_Action)(agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
 			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
 		} catch (Exception ex) {
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
+//			ex.printStackTrace();
 			return;
 		}
 	}
