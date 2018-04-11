@@ -34,6 +34,7 @@ public class LookForHotel extends Agent {
 	public LookForHotel(String... args) {
 		super(args[1]);
 		localisation = args[0];
+		listHotels = new ArrayList<Hotel>();
 	}
 
 	/**
@@ -71,6 +72,8 @@ public class LookForHotel extends Agent {
 			}
 		}
 	};
+	
+	
 
 	/**
 	 * l'action à entreprendre sur le serveur d'annuaire
