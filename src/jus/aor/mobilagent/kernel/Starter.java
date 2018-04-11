@@ -194,7 +194,7 @@ public class Starter {
 				return new Iterator<Node>() {
 					NodeList nodelist;
 					int current = 0, length;
-					{ // init
+					{
 						try {
 							nodelist = ((Document) racine).getElementsByTagName(element);
 						} catch (ClassCastException e) {

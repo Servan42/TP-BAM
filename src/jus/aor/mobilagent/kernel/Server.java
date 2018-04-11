@@ -66,8 +66,6 @@ public final class Server implements _Server {
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
-			// logger.log(Level.FINE, " erreur durant le lancement du serveur" +
-			// this, ex);
 			System.out.println("Erreur durant le lancement du serveur " + ex);
 			ex.printStackTrace();
 			return;
@@ -103,8 +101,6 @@ public final class Server implements _Server {
 			server.close();
 		} catch (FileNotFoundException ex) {
 		} catch (Exception ex) {
-			// logger.log(Level.FINE, " erreur durant le lancement du serveur" +
-			// this, ex);
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
 			ex.printStackTrace();
 			return;
@@ -128,15 +124,8 @@ public final class Server implements _Server {
 	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
-			// FIXME Utiliser className, le nom de la classe donnée dans le xml
-			// _Agent agent =
-			// (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
 			_Agent agent = new LookForHotel((String) args[0], codeBase);
 			agent.init(agentServer, name);
-			// for (int i = 0; i < etapeAddress.size(); i++)
-			// agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
-			// (_Action)
-			// (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
 			_Courtage courtage = (_Courtage) java.rmi.Naming.lookup("//localhost:5555/Courtage");
 			List<URI> etapes = courtage.getURI("Hotels");
 			for (int i = 0; i < etapes.size(); i++) {
@@ -171,12 +160,8 @@ public final class Server implements _Server {
 	 */
 	public final void deployAgent(String classeName, Object[] args, String codeBase, List<ServiceDescriptor> list) {
 		try {
-			// A COMPLETER en terme de startAgent
-			// TODO
 			System.out.println(this.toString() + " Method deployAgent<ServiceDescriptor> : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
-			// logger.log(Level.FINE, " erreur durant le lancement du serveur" +
-			// this, ex);
 			return;
 		}
 	}
@@ -192,8 +177,6 @@ public final class Server implements _Server {
 	 * @throws Exception
 	 */
 	protected void startAgent(_Agent agent, BAMAgentClassLoader loader) throws Exception {
-		// A COMPLETER
-		// TODO
 		System.out.println(this.toString() + " Method startAgent : NOT IMPLEMETED YET");
 	}
 
