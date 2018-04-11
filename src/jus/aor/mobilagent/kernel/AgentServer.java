@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
+import java.rmi.registry.LocateRegistry;
 
 /**
  * Le server qui supporte le modèle du bus à agents mobiles "mobilagent".
@@ -27,6 +28,8 @@ final class AgentServer {
 	private ServerSocket s;
 	/** le nom logique de ce serveur */
 	private String name;
+	/** l'annuaire de services */
+	private Courtage courtage = null;
 
 	/**
 	 * L'initialisation du server
@@ -57,17 +60,43 @@ final class AgentServer {
 		Socket client;
 		while (true) {
 			client = s.accept();
-			System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
-			Agent agent = (Agent) this.getAgent(client);
-			agent.reInit(this, name);
-			new Thread(agent).start();
+			BAMAgentClassLoader acl = new BAMAgentClassLoader(this.getClass().getClassLoader());
+			AgentInputStream ais = new AgentInputStream(client.getInputStream(), acl);
+			String typeClient = (String)ais.readObject();
+			if(typeClient.equals("AGENT")) {
+				System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
+				Agent agent = (Agent) this.getAgent(client, ais, acl);
+				agent.reInit(this, name);
+				new Thread(agent).start();
+			} else if(typeClient.equals("SERVEUR")) {
+				putServiceInRMI(client, ais, acl);
+			}
 		}
 	}
 
-	private _Agent getAgent(Socket socket) throws IOException, ClassNotFoundException {
-		BAMAgentClassLoader acl = new BAMAgentClassLoader(this.getClass().getClassLoader());
+	/**
+	 * 
+	 * @param client
+	 * @param ais
+	 * @param acl
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 * @throws URISyntaxException 
+	 */
+	private void putServiceInRMI(Socket client, AgentInputStream ais, BAMAgentClassLoader acl) throws ClassNotFoundException, IOException, URISyntaxException {
+		if(courtage == null) {
+			// Creer courtage et le placer dans le registre
+			courtage = new Courtage();
+			LocateRegistry.createRegistry(2001);
+			java.rmi.Naming.bind("//localhost:1234/Courtage", courtage);
+		}
+		
+		String serviceName = (String)ais.readObject();
+		System.out.println("AJOUT DU SERVICE "+serviceName+" DANS L'ANNUAIRE POUR "+client.getInetAddress().toString());
+		courtage.add(new URI(client.getInetAddress().toString()), serviceName);
+	}
 
-		AgentInputStream ais = new AgentInputStream(socket.getInputStream(), acl);
+	private _Agent getAgent(Socket socket, AgentInputStream ais, BAMAgentClassLoader acl) throws IOException, ClassNotFoundException {
 		Jar jar = (Jar) ais.readObject();
 		acl.integrateCode(jar);
 		_Agent agent = (_Agent) ais.readObject();
