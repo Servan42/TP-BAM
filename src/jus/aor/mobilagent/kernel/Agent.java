@@ -30,7 +30,6 @@ public class Agent implements _Agent {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("Agent créé");
 	}
 
 	@Override
@@ -50,7 +49,6 @@ public class Agent implements _Agent {
 		route = new Route(new Etape(agentServer.site(), _Action.NIHIL));
 		currServ = agentServer;
 		currServName = serverName;
-		System.out.println("Agent initialisé");
 	}
 
 	@Override
@@ -75,7 +73,7 @@ public class Agent implements _Agent {
 			private static final long serialVersionUID = -3742771451224038951L;
 
 			public void execute() {
-				System.out.println("J'AI FINI !");
+				System.out.println("Agent : Over.");
 				timeFin = new Date().getTime();
 				System.out.println("Elapsed time : " + (timeFin - timeDebut) + " ms");
 			}

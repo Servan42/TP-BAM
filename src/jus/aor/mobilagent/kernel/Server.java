@@ -128,13 +128,11 @@ public final class Server implements _Server {
 	public final void deployAgent(String className, Object[] args, String codeBase, List<String> etapeAddress,
 			List<String> etapeAction) {
 		try {
-			System.out.println("Création de l'agent... ");
 			// FIXME Utiliser className, le nom de la classe donnée dans le xml
 			// _Agent agent =
 			// (_Agent)Class.forName(className).getConstructors()[0].newInstance(args);//getConstructor(String.class).newInstance("hey");
 			_Agent agent = new LookForHotel((String) args[0], codeBase);
 			agent.init(agentServer, name);
-			System.out.println("Creation de la route de l'agent...");
 			// for (int i = 0; i < etapeAddress.size(); i++)
 			// agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
 			// (_Action)
@@ -150,7 +148,7 @@ public final class Server implements _Server {
 				agent.addEtape(new Etape(etapes.get(i),
 						(_Action) (agent.getClass().getDeclaredField("findTelephone").get(agent))));
 			}
-			System.out.println("Lancement de l'agent...");
+			System.out.println("Agent : Start.");
 			new Thread(agent).start();
 		} catch (Exception ex) {
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
