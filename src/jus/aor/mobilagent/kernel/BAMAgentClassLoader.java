@@ -1,5 +1,6 @@
 package jus.aor.mobilagent.kernel;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public class BAMAgentClassLoader extends ClassLoader {
 		this.jarName = jarName;
 		try {
 			this.jar = new Jar(jarName);
+		} catch (FileNotFoundException ex) {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

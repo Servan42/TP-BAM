@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Courtage extends UnicastRemoteObject {
+public class Courtage extends UnicastRemoteObject implements _Courtage {
+
+	private static final long serialVersionUID = 1L;
 	HashMap<URI, List<String>> courtage;
 
 	public Courtage() throws RemoteException {

@@ -3,6 +3,7 @@
  */
 package jus.aor.mobilagent.kernel;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
@@ -102,8 +103,11 @@ public final class Server implements _Server {
 			OutputStream os = server.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 			oos.writeObject("SERVER");
+			oos.writeObject("http://localhost:" + this.port);
 			oos.writeObject(name);
 			oos.close();
+			server.close();
+		} catch (FileNotFoundException ex) {
 		} catch (Exception ex) {
 			// logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
@@ -136,9 +140,18 @@ public final class Server implements _Server {
 			_Agent agent = new LookForHotel((String) args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
-			for (int i = 0; i < etapeAddress.size(); i++)
-				agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
-						(_Action) (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+//			for (int i = 0; i < etapeAddress.size(); i++)
+//				agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
+//						(_Action) (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			_Courtage courtage = (_Courtage) java.rmi.Naming.lookup("//localhost:5555/Courtage");
+			List<URI> etapes = courtage.getURI("Hotels");
+			for(int i = 0; i < etapes.size(); i++){
+				agent.addEtape(new Etape(etapes.get(i), (_Action) (agent.getClass().getDeclaredField("findHotel").get(agent))));
+			}
+			etapes = courtage.getURI("Telephones");
+			for(int i = 0; i < etapes.size(); i++){
+				agent.addEtape(new Etape(etapes.get(i), (_Action) (agent.getClass().getDeclaredField("findTelephone").get(agent))));
+			}
 			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
 		} catch (Exception ex) {

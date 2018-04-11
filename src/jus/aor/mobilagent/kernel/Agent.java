@@ -110,6 +110,7 @@ public class Agent implements _Agent {
 			oos.writeObject("AGENT");
 			oos.writeObject(codeBase);
 			oos.writeObject(this);
+			oos.close();
 			server.close();
 		} catch (Exception e) {
 			System.out.println("Erreur dans move(URL), host = " + url.getHost() + " port = " + url.getPort());

@@ -64,18 +64,20 @@ final class AgentServer {
 			BAMAgentClassLoader acl = new BAMAgentClassLoader(this.getClass().getClassLoader());
 			AgentInputStream ais = new AgentInputStream(client.getInputStream(), acl);
 			String typeClient = (String)ais.readObject();
+			System.out.println("Type client : " + typeClient);
 			if(typeClient.equals("AGENT")) {
 				System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
 				Agent agent = (Agent) this.getAgent(client, ais, acl);
 				agent.reInit(this, name);
 				new Thread(agent).start();
-			} else if(typeClient.equals("SERVEUR")) {
+			} else if(typeClient.equals("SERVER")) {
 				try {
 					putServiceInRMI(client, ais, acl);
 				} catch (URISyntaxException | AlreadyBoundException e) {
 					e.printStackTrace();
 				}
 			}
+			ais.close();
 		}
 	}
 
@@ -93,22 +95,20 @@ final class AgentServer {
 		if(courtage == null) {
 			// Creer courtage et le placer dans le registre
 			courtage = new Courtage();
-			LocateRegistry.createRegistry(2001);
-			java.rmi.Naming.bind("//localhost:1234/Courtage", courtage);
+			LocateRegistry.createRegistry(5555);
+			java.rmi.Naming.bind("//localhost:5555/Courtage", courtage);
 		}
 		
+		String uri = (String) ais.readObject();
 		String serviceName = (String)ais.readObject();
-		System.out.println("AJOUT DU SERVICE "+serviceName+" DANS L'ANNUAIRE POUR "+client.getInetAddress().toString());
-		courtage.add(new URI(client.getInetAddress().toString()), serviceName);
+		System.out.println("AJOUT DU SERVICE "+serviceName+" DANS L'ANNUAIRE POUR " + uri);
+		courtage.add(new URI(uri), serviceName);
 	}
 
 	private _Agent getAgent(Socket socket, AgentInputStream ais, BAMAgentClassLoader acl) throws IOException, ClassNotFoundException {
 		Jar jar = (Jar) ais.readObject();
 		acl.integrateCode(jar);
 		_Agent agent = (_Agent) ais.readObject();
-
-		ais.close();
-
 		return agent;
 	}
 
