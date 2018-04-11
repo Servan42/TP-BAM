@@ -25,11 +25,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * @author Morat Arguments for ServerX : Configurations/hostel.serverX.xml
- *         ServerX Arguments for Client1 : Configurations/hostel.client1.xml
- *         Client1 Argument JVM :
- *         -Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy"
- *         -Dsun.lang.ClassLoader.allowArraySyntax=true
+ * @author Morat
+ * @brief Arguments for ServerX : Configurations/hostel.serverX.xml ServerX
+ *        Arguments for Client1 : Configurations/hostel.client1.xml Client1
+ *        Argument JVM :
+ *        -Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy"
+ *        -Dsun.lang.ClassLoader.allowArraySyntax=true
  */
 @SuppressWarnings("deprecation")
 public class Starter {
