@@ -4,8 +4,11 @@
 package jus.aor.mobilagent.kernel;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.URI;
 import java.net.URL;
 import java.util.List;
@@ -95,6 +98,12 @@ public final class Server implements _Server {
 			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String.class)
 					.newInstance(args[0]);
 			agentServer.addService(name, service);
+			Socket server = new Socket("localhost",4444);
+			OutputStream os = server.getOutputStream();
+			ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject("SERVER");
+			oos.writeObject(name);
+			oos.close();
 		} catch (Exception ex) {
 			// logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
