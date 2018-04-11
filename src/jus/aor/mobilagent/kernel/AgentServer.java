@@ -74,7 +74,6 @@ final class AgentServer {
 			BAMAgentClassLoader acl = new BAMAgentClassLoader(this.getClass().getClassLoader());
 			AgentInputStream ais = new AgentInputStream(client.getInputStream(), acl);
 			String typeClient = (String) ais.readObject();
-			System.out.println("Type client : " + typeClient);
 			if (typeClient.equals("AGENT")) {
 				System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
 				Agent agent = (Agent) this.getAgent(client, ais, acl);
@@ -112,7 +111,7 @@ final class AgentServer {
 
 		String uri = (String) ais.readObject();
 		String serviceName = (String) ais.readObject();
-		System.out.println("AJOUT DU SERVICE " + serviceName + " DANS L'ANNUAIRE POUR " + uri);
+		System.out.println("Ajout du service " + serviceName + " dans l'annuaire pour " + uri);
 		courtage.add(new URI(uri), serviceName);
 	}
 
