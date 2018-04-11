@@ -5,6 +5,7 @@ import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.*;
+import java.rmi.AlreadyBoundException;
 import java.rmi.registry.LocateRegistry;
 
 /**
@@ -69,7 +70,11 @@ final class AgentServer {
 				agent.reInit(this, name);
 				new Thread(agent).start();
 			} else if(typeClient.equals("SERVEUR")) {
-				putServiceInRMI(client, ais, acl);
+				try {
+					putServiceInRMI(client, ais, acl);
+				} catch (URISyntaxException | AlreadyBoundException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -82,8 +87,9 @@ final class AgentServer {
 	 * @throws ClassNotFoundException
 	 * @throws IOException
 	 * @throws URISyntaxException 
+	 * @throws AlreadyBoundException 
 	 */
-	private void putServiceInRMI(Socket client, AgentInputStream ais, BAMAgentClassLoader acl) throws ClassNotFoundException, IOException, URISyntaxException {
+	private void putServiceInRMI(Socket client, AgentInputStream ais, BAMAgentClassLoader acl) throws ClassNotFoundException, IOException, URISyntaxException, AlreadyBoundException {
 		if(courtage == null) {
 			// Creer courtage et le placer dans le registre
 			courtage = new Courtage();
