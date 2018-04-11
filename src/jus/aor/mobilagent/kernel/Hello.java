@@ -1,8 +1,5 @@
 package jus.aor.mobilagent.kernel;
 
-import jus.aor.mobilagent.kernel.Agent;
-import jus.aor.mobilagent.kernel._Action;
-
 /**
  * Classe de test élémentaire pour le bus à agents mobiles
  * 
@@ -41,13 +38,15 @@ public class Hello extends Agent {
 	 */
 	@Override
 	protected _Action retour() {
-		return new _Action() { 
+		return new _Action() {
 			private static final long serialVersionUID = -3742771451224038951L;
-			
-			public void execute() {System.out.println("J'AI FINI !");}
+
+			public void execute() {
+				System.out.println("J'AI FINI !");
+			}
 		};
 	}
-	
+
 	public String toString() {
 		return "Classe Hello.java";
 	}

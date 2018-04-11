@@ -1,10 +1,8 @@
 package jus.aor.mobilagent.kernel;
 
-import java.util.List;
-import jus.aor.mobilagent.kernel._Action;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 /**
  * J<i>ava</i> U<i>tilities</i> for S<i>tudents</i>
@@ -18,7 +16,7 @@ import java.util.Date;
  */
 public class LookForHotel extends Agent {
 	private static final long serialVersionUID = -4685428842247857670L;
-	
+
 	/** le critère de localisaton choisi */
 	private String localisation;
 	private ArrayList<Hotel> listHotels;
@@ -45,10 +43,10 @@ public class LookForHotel extends Agent {
 	 */
 	public long call() {
 		// TODO
-//		long timeDebut = new Date().getTime();
+		// long timeDebut = new Date().getTime();
 		System.out.println(toString() + " call() NOT IMPLEMETED YET");
-//		long timeFin = new Date().getTime();
-//		System.out.println("Elapsed time : " + (timeFin - timeDebut));
+		// long timeFin = new Date().getTime();
+		// System.out.println("Elapsed time : " + (timeFin - timeDebut));
 		return super.timeFin - super.timeDebut;
 	}
 
@@ -63,8 +61,8 @@ public class LookForHotel extends Agent {
 		public void execute() {
 			System.out.println("LookForHotel execute findHotel sur " + currServName);
 			ArrayList<Hotel> newListHotels = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
-			for(int i=0; i<newListHotels.size(); i++)
-				if(!listHotels.contains(newListHotels.get(i)))
+			for (int i = 0; i < newListHotels.size(); i++)
+				if (!listHotels.contains(newListHotels.get(i)))
 					listHotels.add(newListHotels.get(i));
 			System.out.println("LFH execute findHotel sur " + currServName);
 			for (int i = 0; i < newListHotels.size(); i++) {
@@ -72,8 +70,6 @@ public class LookForHotel extends Agent {
 			}
 		}
 	};
-	
-	
 
 	/**
 	 * l'action à entreprendre sur le serveur d'annuaire
@@ -85,8 +81,8 @@ public class LookForHotel extends Agent {
 		@Override
 		public void execute() {
 			System.out.println("LFH execute findTelephone sur " + currServName);
-			List<Numero> liste = (List<Numero>)currServ.getService("Telephones").call(listHotels);
-			for(int i=0; i<liste.size(); i++)
+			List<Numero> liste = (List<Numero>) currServ.getService("Telephones").call(listHotels);
+			for (int i = 0; i < liste.size(); i++)
 				System.out.println(listHotels.get(i).name + " " + liste.get(i).numero);
 		}
 	};

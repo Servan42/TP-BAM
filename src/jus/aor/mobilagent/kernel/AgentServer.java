@@ -1,12 +1,20 @@
 package jus.aor.mobilagent.kernel;
 
-import java.io.*;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.net.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectStreamClass;
+import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.registry.LocateRegistry;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Le server qui supporte le modèle du bus à agents mobiles "mobilagent".
@@ -63,14 +71,14 @@ final class AgentServer {
 			client = s.accept();
 			BAMAgentClassLoader acl = new BAMAgentClassLoader(this.getClass().getClassLoader());
 			AgentInputStream ais = new AgentInputStream(client.getInputStream(), acl);
-			String typeClient = (String)ais.readObject();
+			String typeClient = (String) ais.readObject();
 			System.out.println("Type client : " + typeClient);
-			if(typeClient.equals("AGENT")) {
+			if (typeClient.equals("AGENT")) {
 				System.out.println("Client " + client.getInetAddress() + " connected to server " + this.toString());
 				Agent agent = (Agent) this.getAgent(client, ais, acl);
 				agent.reInit(this, name);
 				new Thread(agent).start();
-			} else if(typeClient.equals("SERVER")) {
+			} else if (typeClient.equals("SERVER")) {
 				try {
 					putServiceInRMI(client, ais, acl);
 				} catch (URISyntaxException | AlreadyBoundException e) {
@@ -88,24 +96,26 @@ final class AgentServer {
 	 * @param acl
 	 * @throws ClassNotFoundException
 	 * @throws IOException
-	 * @throws URISyntaxException 
-	 * @throws AlreadyBoundException 
+	 * @throws URISyntaxException
+	 * @throws AlreadyBoundException
 	 */
-	private void putServiceInRMI(Socket client, AgentInputStream ais, BAMAgentClassLoader acl) throws ClassNotFoundException, IOException, URISyntaxException, AlreadyBoundException {
-		if(courtage == null) {
+	private void putServiceInRMI(Socket client, AgentInputStream ais, BAMAgentClassLoader acl)
+			throws ClassNotFoundException, IOException, URISyntaxException, AlreadyBoundException {
+		if (courtage == null) {
 			// Creer courtage et le placer dans le registre
 			courtage = new Courtage();
 			LocateRegistry.createRegistry(5555);
 			java.rmi.Naming.bind("//localhost:5555/Courtage", courtage);
 		}
-		
+
 		String uri = (String) ais.readObject();
-		String serviceName = (String)ais.readObject();
-		System.out.println("AJOUT DU SERVICE "+serviceName+" DANS L'ANNUAIRE POUR " + uri);
+		String serviceName = (String) ais.readObject();
+		System.out.println("AJOUT DU SERVICE " + serviceName + " DANS L'ANNUAIRE POUR " + uri);
 		courtage.add(new URI(uri), serviceName);
 	}
 
-	private _Agent getAgent(Socket socket, AgentInputStream ais, BAMAgentClassLoader acl) throws IOException, ClassNotFoundException {
+	private _Agent getAgent(Socket socket, AgentInputStream ais, BAMAgentClassLoader acl)
+			throws IOException, ClassNotFoundException {
 		Jar jar = (Jar) ais.readObject();
 		acl.integrateCode(jar);
 		_Agent agent = (_Agent) ais.readObject();
@@ -150,8 +160,8 @@ final class AgentServer {
 	}
 
 	/**
-	 * restitue l'URI de ce serveur qui est de la forme : "http://<host>:<port>" ou
-	 * null si cette opération échoue.
+	 * restitue l'URI de ce serveur qui est de la forme : "http://<host>:<port>"
+	 * ou null si cette opération échoue.
 	 * 
 	 * @return l'URI du serveur
 	 */

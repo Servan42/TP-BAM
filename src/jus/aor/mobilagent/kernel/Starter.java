@@ -14,8 +14,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
@@ -23,10 +25,11 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * @author Morat
- * Arguments for ServerX : Configurations/hostel.serverX.xml ServerX
- * Arguments for Client1 : Configurations/hostel.client1.xml Client1
- * Argument JVM : -Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy" -Dsun.lang.ClassLoader.allowArraySyntax=true
+ * @author Morat Arguments for ServerX : Configurations/hostel.serverX.xml
+ *         ServerX Arguments for Client1 : Configurations/hostel.client1.xml
+ *         Client1 Argument JVM :
+ *         -Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy"
+ *         -Dsun.lang.ClassLoader.allowArraySyntax=true
  */
 public class Starter {
 	/** le document xml en cours */
@@ -80,7 +83,8 @@ public class Starter {
 			System.out.println("Déploiement des agents");
 			deployAgents();
 		} catch (Exception ex) {
-//			logger.log(Level.FINE, "Ce programme nécessite un argument : <conf file> <name server>", ex);
+			// logger.log(Level.FINE, "Ce programme nécessite un argument :
+			// <conf file> <name server>", ex);
 			System.out.println("Ce programme nécessite un argument : <conf file> <name server>" + ex);
 			return;
 		}
@@ -131,7 +135,7 @@ public class Starter {
 		try {
 			server.addService(name, classeName, codeBase, args);
 		} catch (Exception e) {
-//			logger.log(Level.FINE, " erreur durant l'ajout d'un service", e);
+			// logger.log(Level.FINE, " erreur durant l'ajout d'un service", e);
 			System.out.println(" erreur durant l'ajout d'un service" + e);
 			e.printStackTrace();
 		}
@@ -182,7 +186,8 @@ public class Starter {
 			System.out.println("Déploiement niveau serveur...");
 			server.deployAgent(classeName, args, codeBase, serverAddress, serverAction);
 		} catch (Exception e) {
-//			logger.log(Level.FINE, " erreur durant le déploiement de l'agent", e);
+			// logger.log(Level.FINE, " erreur durant le déploiement de
+			// l'agent", e);
 			System.out.println(" erreur durant l'ajout d'un service" + e);
 			e.printStackTrace();
 		}

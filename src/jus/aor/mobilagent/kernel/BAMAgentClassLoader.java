@@ -38,7 +38,7 @@ public class BAMAgentClassLoader extends ClassLoader {
 				defineClass(this.className(item.getKey()), item.getValue(), 0, item.getValue().length);
 			}
 		}
-		if(this.jar == null)
+		if (this.jar == null)
 			this.jar = jar;
 	}
 

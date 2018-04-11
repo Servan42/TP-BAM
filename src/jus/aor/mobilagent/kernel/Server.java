@@ -7,18 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import com.sun.org.apache.bcel.internal.generic.LoadClass;
-
-import jus.aor.mobilagent.kernel.BAMAgentClassLoader;
 
 /**
  * Le serveur principal permettant le lancement d'un serveur d'agents mobiles et
@@ -73,7 +66,8 @@ public final class Server implements _Server {
 			/* temporisation de mise en place du server d'agents */
 			Thread.sleep(1000);
 		} catch (Exception ex) {
-			// logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			// logger.log(Level.FINE, " erreur durant le lancement du serveur" +
+			// this, ex);
 			System.out.println("Erreur durant le lancement du serveur " + ex);
 			ex.printStackTrace();
 			return;
@@ -99,7 +93,7 @@ public final class Server implements _Server {
 			_Service<?> service = (_Service<?>) Class.forName(classeName).getConstructor(String.class)
 					.newInstance(args[0]);
 			agentServer.addService(name, service);
-			Socket server = new Socket("localhost",4444);
+			Socket server = new Socket("localhost", 4444);
 			OutputStream os = server.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(os);
 			oos.writeObject("SERVER");
@@ -109,7 +103,8 @@ public final class Server implements _Server {
 			server.close();
 		} catch (FileNotFoundException ex) {
 		} catch (Exception ex) {
-			// logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			// logger.log(Level.FINE, " erreur durant le lancement du serveur" +
+			// this, ex);
 			System.out.println("Erreur durant le lancement du serveur : " + ex);
 			ex.printStackTrace();
 			return;
@@ -140,17 +135,20 @@ public final class Server implements _Server {
 			_Agent agent = new LookForHotel((String) args[0], codeBase);
 			agent.init(agentServer, name);
 			System.out.println("Creation de la route de l'agent...");
-//			for (int i = 0; i < etapeAddress.size(); i++)
-//				agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
-//						(_Action) (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
+			// for (int i = 0; i < etapeAddress.size(); i++)
+			// agent.addEtape(new Etape(new URI(etapeAddress.get(i)),
+			// (_Action)
+			// (agent.getClass().getDeclaredField(etapeAction.get(i)).get(agent))));
 			_Courtage courtage = (_Courtage) java.rmi.Naming.lookup("//localhost:5555/Courtage");
 			List<URI> etapes = courtage.getURI("Hotels");
-			for(int i = 0; i < etapes.size(); i++){
-				agent.addEtape(new Etape(etapes.get(i), (_Action) (agent.getClass().getDeclaredField("findHotel").get(agent))));
+			for (int i = 0; i < etapes.size(); i++) {
+				agent.addEtape(new Etape(etapes.get(i),
+						(_Action) (agent.getClass().getDeclaredField("findHotel").get(agent))));
 			}
 			etapes = courtage.getURI("Telephones");
-			for(int i = 0; i < etapes.size(); i++){
-				agent.addEtape(new Etape(etapes.get(i), (_Action) (agent.getClass().getDeclaredField("findTelephone").get(agent))));
+			for (int i = 0; i < etapes.size(); i++) {
+				agent.addEtape(new Etape(etapes.get(i),
+						(_Action) (agent.getClass().getDeclaredField("findTelephone").get(agent))));
 			}
 			System.out.println("Lancement de l'agent...");
 			new Thread(agent).start();
@@ -179,7 +177,8 @@ public final class Server implements _Server {
 			// TODO
 			System.out.println(this.toString() + " Method deployAgent<ServiceDescriptor> : NOT IMPLEMETED YET");
 		} catch (Exception ex) {
-//			logger.log(Level.FINE, " erreur durant le lancement du serveur" + this, ex);
+			// logger.log(Level.FINE, " erreur durant le lancement du serveur" +
+			// this, ex);
 			return;
 		}
 	}

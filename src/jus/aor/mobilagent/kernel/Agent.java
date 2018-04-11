@@ -3,17 +3,10 @@ package jus.aor.mobilagent.kernel;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.Socket;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
-import java.util.NoSuchElementException;
-
-import jus.aor.mobilagent.kernel.AgentServer;
-import jus.aor.mobilagent.kernel.Etape;
 
 public class Agent implements _Agent {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +17,7 @@ public class Agent implements _Agent {
 	protected Jar codeBase;
 	protected long timeDebut;
 	protected long timeFin;
-	
+
 	/**
 	 * le constructeur auquel on donne le codebase
 	 * 
@@ -33,7 +26,7 @@ public class Agent implements _Agent {
 	 */
 	public Agent(Object... args) {
 		try {
-			codeBase = new Jar((String)args[0]);
+			codeBase = new Jar((String) args[0]);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,10 +35,11 @@ public class Agent implements _Agent {
 
 	@Override
 	public void run() {
-		if(timeDebut == 0) timeDebut = new Date().getTime();
+		if (timeDebut == 0)
+			timeDebut = new Date().getTime();
 		route.get().action.execute();
 		route.next();
-		if(route.hasNext)
+		if (route.hasNext)
 			move();
 		else
 			retour().execute();
@@ -79,7 +73,7 @@ public class Agent implements _Agent {
 	protected _Action retour() {
 		return new _Action() {
 			private static final long serialVersionUID = -3742771451224038951L;
-			
+
 			public void execute() {
 				System.out.println("J'AI FINI !");
 				timeFin = new Date().getTime();
@@ -94,7 +88,7 @@ public class Agent implements _Agent {
 
 	private void move() {
 		try {
-			System.out.println("Moving to "+route.get().server);
+			System.out.println("Moving to " + route.get().server);
 			move(route.get().server.toURL());
 		} catch (Exception e) {
 			System.out.println("Erreur à la récupération de l'URL");
