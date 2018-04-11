@@ -107,6 +107,7 @@ public class Agent implements _Agent {
 			Socket server = new Socket(url.getHost(), url.getPort());
 			OutputStream os = server.getOutputStream();
 			ObjectOutputStream oos = new ObjectOutputStream(os);
+			oos.writeObject("AGENT");
 			oos.writeObject(codeBase);
 			oos.writeObject(this);
 			server.close();
