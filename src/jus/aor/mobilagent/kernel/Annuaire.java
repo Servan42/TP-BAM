@@ -15,7 +15,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Annuaire implements _Annuaire, _Service {
+public class Annuaire implements _Annuaire, _Service<List<Numero>> {
+	/** la liste des correspondances hotel-numéro */
 	HashMap<String, Numero> annuaire;
 
 	public Annuaire(String xml) {
@@ -57,7 +58,7 @@ public class Annuaire implements _Annuaire, _Service {
 	 *            la liste des abonnes
 	 * @return List<Numero> la liste des numeros demandes
 	 */
-	public Object call(Object... params) throws IllegalArgumentException {
+	public List<Numero> call(Object... params) throws IllegalArgumentException {
 		List<Numero> retour = new ArrayList<Numero>();
 		for (int i = 0; i < ((List<String>) params[0]).size(); i++)
 			try {

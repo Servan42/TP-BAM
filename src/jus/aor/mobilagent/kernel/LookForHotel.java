@@ -19,6 +19,7 @@ public class LookForHotel extends Agent {
 
 	/** le critère de localisaton choisi */
 	private String localisation;
+	/** la liste des hotels trouves pour la localisation */
 	private ArrayList<Hotel> listHotels;
 
 	// ...
@@ -42,11 +43,7 @@ public class LookForHotel extends Agent {
 	 * @throws RemoteException
 	 */
 	public long call() {
-		// TODO
-		// long timeDebut = new Date().getTime();
 		System.out.println(toString() + " call() NOT IMPLEMETED YET");
-		// long timeFin = new Date().getTime();
-		// System.out.println("Elapsed time : " + (timeFin - timeDebut));
 		return super.timeFin - super.timeDebut;
 	}
 
@@ -87,7 +84,6 @@ public class LookForHotel extends Agent {
 		}
 	};
 
-	// ...
 	public String toString() {
 		return "Classe LookForHotel.java";
 	}

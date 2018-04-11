@@ -19,8 +19,8 @@ class Route implements Iterable<Etape>, Serializable {
 	/** la liste des étapes à parcourir autres que la dernière */
 	protected List<Etape> route;
 	/**
-	 * la dernière étape de la feuille de route de l'agent qui désigne le
-	 * serveur de départ.
+	 * la dernière étape de la feuille de route de l'agent qui désigne le serveur de
+	 * départ.
 	 */
 	protected Etape retour;
 	/** Indique si la feuille de route est épuisée ou non. */
@@ -55,7 +55,8 @@ class Route implements Iterable<Etape>, Serializable {
 	 * @return la prochaine étape.
 	 */
 	Etape get() throws NoSuchElementException {
-		if (route.size() == 0) { // Il ne reste plus que la dernière etape
+		// Il ne reste que la dernière etape (le retour)
+		if (route.size() == 0) {
 			return retour;
 		} else {
 			return route.get(0);
@@ -63,8 +64,8 @@ class Route implements Iterable<Etape>, Serializable {
 	}
 
 	/**
-	 * Restitue la prochaine étape et élimine de la route ou la dernière qui est
-	 * la base de départ.
+	 * Restitue la prochaine étape et élimine de la route ou la dernière qui est la
+	 * base de départ.
 	 * 
 	 * @return la prochaine étape.
 	 */

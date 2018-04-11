@@ -66,7 +66,6 @@ public class Agent implements _Agent {
 
 	@Override
 	public void init(List<ServiceDescriptor> list) {
-		// TODO Auto-generated method stub
 		System.out.println(this.toString() + " Method init<ServiceDescriptor> : NOT IMPLEMETED YET");
 	}
 
@@ -82,6 +81,7 @@ public class Agent implements _Agent {
 		};
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected _Service getService(String name) {
 		return currServ.getService(name);
 	}

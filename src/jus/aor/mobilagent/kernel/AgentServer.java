@@ -26,12 +26,14 @@ import java.util.logging.Logger;
  */
 final class AgentServer {
 	/** le logger de ce serveur */
+	@SuppressWarnings("unused")
 	private Logger logger;
 	/** La table des services utilisables sur ce serveur */
 	private Map<String, _Service<?>> services;
 	/** Le port auquel est attaché le serveur */
 	private int port;
 	/** l'état du serveur */
+	@SuppressWarnings("unused")
 	private boolean running;
 	/** la socket de communication du bus */
 	private ServerSocket s;

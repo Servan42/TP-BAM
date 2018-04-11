@@ -6,8 +6,7 @@ import java.net.URLClassLoader;
 public class BAMServerClassLoader extends URLClassLoader {
 
 	public BAMServerClassLoader(URL[] arg0, ClassLoader classLoader) {
-		super(arg0, classLoader);
-		// TODO Auto-generated constructor stub BAM
+		super(arg0, classLoader);	
 	}
 
 	protected void addURL(URL url) {

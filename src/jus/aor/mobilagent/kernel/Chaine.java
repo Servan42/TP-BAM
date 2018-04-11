@@ -16,12 +16,13 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
+public class Chaine extends UnicastRemoteObject implements _Chaine, _Service<List<Hotel>> {
 	private static final long serialVersionUID = -47;
+
+	/** la liste des hotels de la chaine */
 	ArrayList<Hotel> hotels;
 
 	public Chaine(String args) throws RemoteException {
-		System.out.println("Plop");
 		hotels = new ArrayList<Hotel>();
 
 		/*
@@ -33,13 +34,11 @@ public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 		try {
 			docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		} catch (ParserConfigurationException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			doc = docBuilder.parse(new File(args));
 		} catch (SAXException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -71,7 +70,7 @@ public class Chaine extends UnicastRemoteObject implements _Chaine, _Service {
 	 *            la localisation recherchee
 	 * @return List<Hotel> les hotels pour la localisation cherchee
 	 */
-	public Object call(Object... params) throws IllegalArgumentException {
+	public List<Hotel> call(Object... params) throws IllegalArgumentException {
 		return get((String) params[0]);
 	}
 

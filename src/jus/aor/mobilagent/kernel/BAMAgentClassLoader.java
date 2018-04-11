@@ -52,12 +52,10 @@ public class BAMAgentClassLoader extends ClassLoader {
 	 * @return
 	 */
 	public Jar extractCode() {
-		// TODO PAS SÛR DU TOUT
 		return jar;
 	}
 
 	public String toString() {
-		// TODO
 		return "Classe BAMAgentClassLoader";
 	}
 }

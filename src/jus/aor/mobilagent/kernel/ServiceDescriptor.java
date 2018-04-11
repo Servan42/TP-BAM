@@ -2,7 +2,6 @@ package jus.aor.mobilagent.kernel;
 
 public class ServiceDescriptor {
 	public ServiceDescriptor() {
-		// TODO
 		System.out.println("NOT IMPLEMETED YET");
 	}
 

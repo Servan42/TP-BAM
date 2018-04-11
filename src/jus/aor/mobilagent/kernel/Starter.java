@@ -31,6 +31,7 @@ import org.w3c.dom.NodeList;
  *         -Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy"
  *         -Dsun.lang.ClassLoader.allowArraySyntax=true
  */
+@SuppressWarnings("deprecation")
 public class Starter {
 	/** le document xml en cours */
 	protected Document doc;
@@ -50,6 +51,7 @@ public class Starter {
 	public Starter(String... args) {
 		// récupération du niveau de log
 
+		@SuppressWarnings("unused")
 		java.util.logging.Level level;
 		try {
 			level = Level.parse(System.getProperty("LEVEL"));
@@ -62,7 +64,6 @@ public class Starter {
 			/* Mise en place du logger pour tracer l'application */
 			String loggerName = "jus/aor/mobilagent/" + InetAddress.getLocalHost().getHostName() + "/" + args[1];
 			logger = Logger.getLogger(loggerName);
-			// logger.setUseParentHandlers(false);
 			logger.addHandler(new IOHandler());
 			logger.setLevel(java.util.logging.Level.SEVERE);
 			/* Récupération d'informations de configuration */
@@ -83,8 +84,6 @@ public class Starter {
 			System.out.println("Déploiement des agents");
 			deployAgents();
 		} catch (Exception ex) {
-			// logger.log(Level.FINE, "Ce programme nécessite un argument :
-			// <conf file> <name server>", ex);
 			System.out.println("Ce programme nécessite un argument : <conf file> <name server>" + ex);
 			return;
 		}
@@ -135,7 +134,6 @@ public class Starter {
 		try {
 			server.addService(name, classeName, codeBase, args);
 		} catch (Exception e) {
-			// logger.log(Level.FINE, " erreur durant l'ajout d'un service", e);
 			System.out.println(" erreur durant l'ajout d'un service" + e);
 			e.printStackTrace();
 		}
@@ -186,8 +184,6 @@ public class Starter {
 			System.out.println("Déploiement niveau serveur...");
 			server.deployAgent(classeName, args, codeBase, serverAddress, serverAction);
 		} catch (Exception e) {
-			// logger.log(Level.FINE, " erreur durant le déploiement de
-			// l'agent", e);
 			System.out.println(" erreur durant l'ajout d'un service" + e);
 			e.printStackTrace();
 		}
@@ -232,6 +228,7 @@ public class Starter {
 	 * 
 	 * @param args
 	 */
+	@SuppressWarnings("deprecation")
 	public static void main(String... args) {
 		if (System.getSecurityManager() == null)
 			System.setSecurityManager(new RMISecurityManager());

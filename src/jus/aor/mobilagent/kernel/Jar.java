@@ -69,6 +69,7 @@ public class Jar implements Iterable<Map.Entry<String, byte[]>>, Serializable {
 			}
 			contents.put(entry.getName(), buffer);
 		}
+		jis.close();
 	}
 
 	/**
