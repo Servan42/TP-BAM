@@ -34,6 +34,7 @@ public class LookForHotel extends Agent {
 	public LookForHotel(String... args) {
 		super(args[1]);
 		localisation = args[0];
+		listHotels = new ArrayList<Hotel>();
 	}
 
 	/**
@@ -61,14 +62,18 @@ public class LookForHotel extends Agent {
 		@Override
 		public void execute() {
 			System.out.println("LookForHotel execute findHotel sur " + currServName);
-			listHotels = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
+			ArrayList<Hotel> newListHotels = (ArrayList<Hotel>) currServ.getService("Hotels").call(localisation);
+			for(int i=0; i<newListHotels.size(); i++)
+				if(!listHotels.contains(newListHotels.get(i)))
+					listHotels.add(newListHotels.get(i));
 			System.out.println("LFH execute findHotel sur " + currServName);
-			for (int i = 0; i < listHotels.size(); i++) {
-				Hotel hotel = listHotels.get(i);
-				System.out.println(hotel.toString());
+			for (int i = 0; i < newListHotels.size(); i++) {
+				System.out.println(newListHotels.get(i).toString());
 			}
 		}
 	};
+	
+	
 
 	/**
 	 * l'action à entreprendre sur le serveur d'annuaire
