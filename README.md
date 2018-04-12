@@ -14,7 +14,7 @@ L'objectif de ce TP est une introduction aux systèmes à agents mobiles, il com
 ### Partie RMI
 Il faut d'abord se rendre sur la [branche RMI](https://github.com/Servan42/TP-BAM/tree/RMI) ou télécharger la release [Objectif 1](https://github.com/Servan42/TP-BAM/releases/tag/Objectif1).
 Dans cette partie, les fichiers intéressants sont dans le package **source** et pas dans **src**.
-Les classes principales qu'il faut lancer sont */source/***LookForHotel.java** (le client) et */source/***Server.java**, avec les configurations suivantes :
+Les classes principales qu'il faut lancer sont source/**LookForHotel.java** (le client) et source/**Server.java**, avec les configurations suivantes :
 * Server : `Configurations/hostel.server1.xml Configurations/hostel.server2.xml DataStore/Annuaire.xml`
 * Client : `Paris`
 
@@ -25,4 +25,5 @@ La classe principale qu'il faut lancer est [Starter](src/jus/aor/mobilagent/kern
 3. Serveur 2 : `Configurations/hostel.server2.xml Server2`
 4. Client : `Configurations/hostel.client1.xml Client1`
 
-Pour chacun, mettre églament les arguments de JVM suivants : `-Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy" -Dsun.lang.ClassLoader.allowArraySyntax=true`
+Pour chacun, mettre églament les arguments de JVM suivants : 
+`-Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy" -Dsun.lang.ClassLoader.allowArraySyntax=true`
