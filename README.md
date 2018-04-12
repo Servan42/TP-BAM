@@ -24,4 +24,5 @@ La classe principale qu'il faut lancer est [Starter](src/jus/aor/mobilagent/kern
 2. Serveur 1 : `Configurations/hostel.server1.xml Server1`
 3. Serveur 2 : `Configurations/hostel.server2.xml Server2`
 4. Client : `Configurations/hostel.client1.xml Client1`
+
 Pour chacun, mettre églament les arguments de JVM suivants : `-Djava.security.policy="/home/drzed/Documents/Polytech/S8/AR/TP-BAM/BAM-policy" -Dsun.lang.ClassLoader.allowArraySyntax=true`
